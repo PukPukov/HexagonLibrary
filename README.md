@@ -28,3 +28,5 @@
 | Hexagon | .getVertexPosition(int index) | Возвращает точку вершины гексагона |
 | Hexagon | .getNeighbor(int index) | Возвращает соседа по индексу |
 | Hexagon | .getNeighbor(HexagonalDirection hexagonalDirection) | Возвращает соседа по гексагональному направлению |
+| Hexagon | .getNeighbors() | Возвращает упорядоченно всех соседей 1 порядка |
+| Hexagon | .getNeighbors(int layers) | Возвращает неупорядоченно всех соседей указанного порядка, работает быстрее |
