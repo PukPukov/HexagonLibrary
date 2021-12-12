@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Region {
-    HexagonGrid grid;
+    HexagonalGrid grid;
     private Hexagon[] hexagones;
     private HashMap<Long, Integer> lookup;
 
-    Region(HexagonGrid grid, Point[] geometry) {
+    Region(HexagonalGrid grid, Point[] geometry) {
         this.grid = grid;
 
         int len = geometry.length;

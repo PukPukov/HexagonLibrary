@@ -1,14 +1,17 @@
 package library.HexagonComponents;
 
 import library.Hexagon;
+import library.HexagonalGrid;
+import library.Orientation;
+import library.Point;
 
 public class Vertex {
 
-    private Hexagon hexagon;
+    private Hexagon baseHexagon;
     private int vertexIndex;
 
     public Vertex(Hexagon hexagon, int vertexIndex) {
-        this.hexagon = hexagon;
+        this.baseHexagon = hexagon;
         this.vertexIndex = vertexIndex;
     }
 
@@ -19,30 +22,30 @@ public class Vertex {
     public Hexagon[] getConnected() {
         Hexagon[] connected = new Hexagon[2];
         if (this.vertexIndex == 0) {
-            connected[0] = hexagon.getNeighbor(5);
-            connected[1] = hexagon.getNeighbor(0);
+            connected[0] = baseHexagon.getNeighbor(5);
+            connected[1] = baseHexagon.getNeighbor(0);
         }
         if (this.vertexIndex == 1) {
-            connected[0] = hexagon.getNeighbor(0);
-            connected[1] = hexagon.getNeighbor(1);
+            connected[0] = baseHexagon.getNeighbor(0);
+            connected[1] = baseHexagon.getNeighbor(1);
         }
         if (this.vertexIndex == 2) {
-            connected[0] = hexagon.getNeighbor(1);
-            connected[1] = hexagon.getNeighbor(2);
+            connected[0] = baseHexagon.getNeighbor(1);
+            connected[1] = baseHexagon.getNeighbor(2);
             return connected;
         }
         if (this.vertexIndex == 3) {
-            connected[0] = hexagon.getNeighbor(2);
-            connected[1] = hexagon.getNeighbor(3);
+            connected[0] = baseHexagon.getNeighbor(2);
+            connected[1] = baseHexagon.getNeighbor(3);
             return connected;
         }
         if (this.vertexIndex == 4) {
-            connected[0] = hexagon.getNeighbor(3);
-            connected[1] = hexagon.getNeighbor(4);
+            connected[0] = baseHexagon.getNeighbor(3);
+            connected[1] = baseHexagon.getNeighbor(4);
             return connected;
         }
-        connected[0] = hexagon.getNeighbor(4);
-        connected[1] = hexagon.getNeighbor(5);
+        connected[0] = baseHexagon.getNeighbor(4);
+        connected[1] = baseHexagon.getNeighbor(5);
         return connected;
     }
 
@@ -78,6 +81,7 @@ public class Vertex {
         equals[1] = new Vertex(connected[1], 3);
         return equals;
     }
+
     public Vertex getAbsolute() {
         Vertex[] equals = this.getEquals();
         for (Vertex equal : equals) {
@@ -87,5 +91,16 @@ public class Vertex {
             }
         }
         return this;
+    }
+
+    public Point getPosition() {
+        HexagonalGrid grid = baseHexagon.getGrid();
+        Point center = baseHexagon.getCenter();
+        Point size = grid.getSize();
+        Orientation orientation = grid.getOrientation();
+        double x = size.getX() * orientation.getCosinuses()[this.vertexIndex] + center.getX();
+        double y = size.getY() * orientation.getSinuses()[this.vertexIndex] + center.getY();
+        Point vertexPosition = new Point(x, y);
+        return vertexPosition;
     }
 }

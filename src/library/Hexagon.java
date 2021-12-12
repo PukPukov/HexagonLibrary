@@ -6,9 +6,9 @@ import library.HexagonComponents.Vertex;
 public class Hexagon {
     private long q;
     private long r;
-    private HexagonGrid grid;
+    private HexagonalGrid grid;
 
-    public Hexagon(HexagonGrid grid, long q, long r) {
+    public Hexagon(HexagonalGrid grid, long q, long r) {
         this.q = q;
         this.r = r;
         this.grid = grid;
@@ -29,6 +29,10 @@ public class Hexagon {
     public long getCode() {
         Morton64 mort = grid.getMort();
         return mort.spack(this.q, this.r);
+    }
+
+    public HexagonalGrid getGrid() {
+        return this.grid;
     }
 
     public Point getCenter() {
@@ -65,24 +69,14 @@ public class Hexagon {
     }
 
     public Point getVertexPosition(int index) {
-        Point center = getCenter();
-        Point size = grid.getSize();
-        Orientation orientation = grid.getOrientation();
-        double x = size.getX() * orientation.getCosinuses()[index] + center.getX();
-        double y = size.getY() * orientation.getSinuses()[index] + center.getY();
-        Point vertexPosition = new Point(x, y);
-        return vertexPosition;
+        Vertex vertex = new Vertex(this, index);
+        return vertex.getPosition();
     }
 
     public Point[] getVertexPositions() {
         Point[] corners = new Point[6];
-        Point center = getCenter();
-        Point size = grid.getSize();
-        Orientation orientation = grid.getOrientation();
         for (int i = 0; i < 6; i++) {
-            double x = size.getX() * orientation.getCosinuses()[i] + center.getX();
-            double y = size.getY() * orientation.getSinuses()[i] + center.getY();
-            corners[i] = new Point(x, y);
+            corners[i] = this.getVertexPosition(i);
         }
         return corners;
     }

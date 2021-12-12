@@ -31,6 +31,13 @@ public class Side {
         return baseHexagon.getNeighbor(hexagonalDirection);
     }
 
+    public Point[] getEnds() {
+        Point[] points = new Point[2];
+        points[0] = new Vertex(this.getBaseHexagon(), this.getIndex()+1).getPosition();
+        points[1] = new Vertex(this.getBaseHexagon(), this.getIndex()+1).getPosition();
+        return points;
+    }
+
     public Side getEqual() {
         if (this.sideIndex == 0) {
             return new Side(this.baseHexagon, 3);

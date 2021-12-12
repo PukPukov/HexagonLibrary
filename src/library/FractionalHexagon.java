@@ -3,9 +3,9 @@ package library;
 public class FractionalHexagon {
     private double q;
     private double r;
-    private HexagonGrid grid;
+    private HexagonalGrid grid;
 
-    public FractionalHexagon(double q, double r, HexagonGrid grid) {
+    public FractionalHexagon(double q, double r, HexagonalGrid grid) {
         this.q = q;
         this.r = r;
         this.grid = grid;
