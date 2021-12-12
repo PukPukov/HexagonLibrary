@@ -15,3 +15,16 @@
     Hexagon hexagon = grid.getHexagon(new Point(50, 50));
 ```
 ## API
+| Объект | Метод | Описание|
+|----:|:----:|:----------|
+| HexagonalGrid | .getHexagon(Point point) | Возвращает гексагон, в котором находится данная точка |
+| HexagonalGrid | .getBounds(Hexagon[] hexagons) | Возвращает массив сторон, являющимися сторонами геометрической фигуры, составленной из данных гексагонов |
+| HexagonalGrid | .createRegion(Point[] geometry) | Возвращает регион, образованный данными точками |
+| Hexagon | .getCenter() | Возвращает точку центра гексагона |
+| Hexagon | .getSide(int index) | Возвращает объект стороны гексагона |
+| Hexagon | .getSides() | Возвращает массив всех сторон гексагона |
+| Hexagon | .getVertex(int index) | Возвращает объект вершины гексагона |
+| Hexagon | .getVertexes() | Возвращает массив всех вершин гексагона |
+| Hexagon | .getVertexPosition(int index) | Возвращает точку вершины гексагона |
+| Hexagon | .getNeighbor(int index) | Возвращает соседа по индексу |
+| Hexagon | .getNeighbor(HexagonalDirection hexagonalDirection) | Возвращает соседа по гексагональному направлению |
