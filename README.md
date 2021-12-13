@@ -44,3 +44,14 @@
 | Объект | Метод | Описание|
 |----:|:----:|:----------|
 ## Конструкторы
+| Объект | Конструктор |
+|----:|:----------|
+| HexagonalGrid | new HexagonalGrid(Orientation orientation, Point origin, Point size, Morton64 mort) |
+| Hexagon | new Hexagon(HexagonalGrid grid, long q, long r) |
+| Side | new Side(Hexagon baseHexagon, int sideIndex) |
+| Vertex | new Vertex(Hexagon hexagon, int vertexIndex) |
+| Point | new Point(double x, double y) |
+| Orientation | new Orientation(String name, double[] f, double[] b, double startAngle) |
+| FractionalHexagon | new FractionalHexagon(double q, double r, HexagonalGrid grid) |
+| Region | new Region(HexagonalGrid grid, Point[] geometry) |
+| Morton64 | new Morton64(long dimensions, long bits) |
