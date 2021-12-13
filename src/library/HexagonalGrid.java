@@ -1,6 +1,6 @@
 package library;
 
-import library.HexagonComponents.Side;
+import library.HexagonComponents.HexagonSide;
 
 import java.util.ArrayList;
 
@@ -46,13 +46,13 @@ public class HexagonalGrid {
         return (new FractionalHexagon(q, r, this)).toHexagon();
     }
 
-    public Side[] getBounds(Hexagon[] hexagons) {
-        ArrayList<Side> sides = new ArrayList<>();
+    public HexagonSide[] getBounds(Hexagon[] hexagons) {
+        ArrayList<HexagonSide> sides = new ArrayList<>();
         for (int i = 0; i<hexagons.length; i++) {
-            Side[] hexagonSides = hexagons[i].getSides();
-            for (int j = 0; i<hexagonSides.length; i++) {
-                hexagonSides[i] = hexagonSides[i].getAbsolute();
-                sides.add(hexagonSides[i]);
+            HexagonSide[] hexagonHexagonSides = hexagons[i].getSides();
+            for (int j = 0; i< hexagonHexagonSides.length; i++) {
+                hexagonHexagonSides[i] = hexagonHexagonSides[i].getAbsolute();
+                sides.add(hexagonHexagonSides[i]);
             }
         }
         for(int i=0; i<sides.size(); i++) {
@@ -63,11 +63,11 @@ public class HexagonalGrid {
                 }
             }
         }
-        return sides.toArray(new Side[0]);
+        return sides.toArray(new HexagonSide[0]);
     }
 
-    public Region createRegion(Point[] geometry) {
-        return new Region(this, geometry);
+    public HexagonRegion createRegion(Point[] geometry) {
+        return new HexagonRegion(this, geometry);
     }
 
     @Override

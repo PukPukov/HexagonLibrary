@@ -1,7 +1,7 @@
 package library;
 
-import library.HexagonComponents.Side;
-import library.HexagonComponents.Vertex;
+import library.HexagonComponents.HexagonSide;
+import library.HexagonComponents.HexagonVertex;
 
 public class Hexagon {
     private long q;
@@ -44,33 +44,33 @@ public class Hexagon {
         return new Point(x, y);
     }
 
-    public Side getSide(int index) {
-        return new Side(this, index);
+    public HexagonSide getSide(int index) {
+        return new HexagonSide(this, index);
     }
 
-    public Side[] getSides() {
-        Side[] sides = new Side[6];
+    public HexagonSide[] getSides() {
+        HexagonSide[] hexagonSides = new HexagonSide[6];
         for (int i = 0; i<6; i++) {
-            sides[i] = this.getSide(i);
+            hexagonSides[i] = this.getSide(i);
         }
-        return sides;
+        return hexagonSides;
     }
 
-    public Vertex getVertex(int index) {
-        return new Vertex(this, index);
+    public HexagonVertex getVertex(int index) {
+        return new HexagonVertex(this, index);
     }
 
-    public Vertex[] getVertexes() {
-        Vertex[] vertexes = new Vertex[6];
+    public HexagonVertex[] getVertexes() {
+        HexagonVertex[] hexagonVertices = new HexagonVertex[6];
         for (int i = 0; i<6; i++) {
-            vertexes[i] = this.getVertex(i);
+            hexagonVertices[i] = this.getVertex(i);
         }
-        return vertexes;
+        return hexagonVertices;
     }
 
     public Point getVertexPosition(int index) {
-        Vertex vertex = new Vertex(this, index);
-        return vertex.getPosition();
+        HexagonVertex hexagonVertex = new HexagonVertex(this, index);
+        return hexagonVertex.getPosition();
     }
 
     public Point[] getVertexPositions() {
