@@ -14,6 +14,15 @@ public class Hexagon {
         this.grid = grid;
     }
 
+    public Hexagon(Hexagon hexagon) {
+        long q = hexagon.getQ();
+        long r = hexagon.getR();
+        HexagonalGrid grid = hexagon.getGrid();
+        this.q = q;
+        this.r = r;
+        this.grid = grid;
+    }
+
     public long getQ() {
         return q;
     }

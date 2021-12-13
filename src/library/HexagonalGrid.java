@@ -17,6 +17,17 @@ public class HexagonalGrid {
         this.mort = mort;
     }
 
+    public HexagonalGrid(HexagonalGrid hexagonalGrid) {
+        Orientation orientation = hexagonalGrid.getOrientation();
+        Point origin = hexagonalGrid.getOrigin();
+        Point size = hexagonalGrid.getSize();
+        Morton64 mort = hexagonalGrid.getMort();
+        this.orientation = orientation;
+        this.origin = origin;
+        this.size = size;
+        this.mort = mort;
+    }
+
     public Morton64 getMort() {
         return mort;
     }

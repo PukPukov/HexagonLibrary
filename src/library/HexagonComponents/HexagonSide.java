@@ -33,8 +33,14 @@ public class HexagonSide {
 
     public Point[] getEnds() {
         Point[] points = new Point[2];
-        points[0] = new HexagonVertex(this.getBaseHexagon(), this.getIndex()+1).getPosition();
-        points[1] = new HexagonVertex(this.getBaseHexagon(), this.getIndex()+1).getPosition();
+        if (this.getIndex() < 5) {
+            points[0] = new HexagonVertex(this.getBaseHexagon(), this.getIndex()).getPosition();
+            points[1] = new HexagonVertex(this.getBaseHexagon(), this.getIndex()+1).getPosition();
+        }
+        if (this.getIndex() == 5) {
+            points[0] = new HexagonVertex(this.getBaseHexagon(), 5).getPosition();
+            points[1] = new HexagonVertex(this.getBaseHexagon(), 0).getPosition();
+        }
         return points;
     }
 
