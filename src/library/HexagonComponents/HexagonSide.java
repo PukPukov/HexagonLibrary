@@ -2,6 +2,7 @@ package library.HexagonComponents;
 
 import library.Hexagon;
 import library.HexagonalDirection;
+import library.HexagonalGrid;
 import library.Point;
 
 public class HexagonSide {
@@ -64,14 +65,14 @@ public class HexagonSide {
     }
 
     public HexagonSide getAbsolute() {
-        if (this.sideIndex < 3) {
+        if (this.sideIndex > 2) {
             if (this.sideIndex == 3) {
                 return new HexagonSide(this.baseHexagon.getNeighbor(3), 0);
             }
             if (this.sideIndex == 4) {
                 return new HexagonSide(this.baseHexagon.getNeighbor(4), 1);
             }
-            if (this.sideIndex == 4) {
+            if (this.sideIndex == 5) {
                 return new HexagonSide(this.baseHexagon.getNeighbor(5), 2);
             }
         }
@@ -80,13 +81,17 @@ public class HexagonSide {
 
     @Override
     public String toString() {
-        return String.format("side{baseHexagon: %s, sideIndex: %i}", this.baseHexagon.toString(), this.sideIndex);
+        return String.format("hexagonSide{baseHexagon: %s, sideIndex: %i}", this.baseHexagon.toString(), this.sideIndex);
     }
 
-    public boolean equals(HexagonSide other) {
-        if (other == null) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
+        if (!HexagonSide.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        HexagonSide other = (HexagonSide)obj;
         return other.getBaseHexagon().equals(this.baseHexagon) && other.getIndex() == this.sideIndex;
     }
 }

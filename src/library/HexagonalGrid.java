@@ -3,6 +3,7 @@ package library;
 import library.HexagonComponents.HexagonSide;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HexagonalGrid {
     private Orientation orientation;
@@ -60,20 +61,24 @@ public class HexagonalGrid {
     public HexagonSide[] getBounds(Hexagon[] hexagons) {
         ArrayList<HexagonSide> sides = new ArrayList<>();
         for (int i = 0; i<hexagons.length; i++) {
-            HexagonSide[] hexagonHexagonSides = hexagons[i].getSides();
-            for (int j = 0; i< hexagonHexagonSides.length; i++) {
-                hexagonHexagonSides[i] = hexagonHexagonSides[i].getAbsolute();
-                sides.add(hexagonHexagonSides[i]);
+            HexagonSide[] hexagonSides = hexagons[i].getSides();
+            for (int j = 0; j<hexagonSides.length; j++) {
+                hexagonSides[j] = hexagonSides[j].getAbsolute();
+                sides.add(hexagonSides[j]);
             }
         }
         for(int i=0; i<sides.size(); i++) {
             for (int j=i+1; j<sides.size(); j++) {
+                if (sides.get(i) == null || sides.get(j) == null) {
+                    continue;
+                }
                 if(sides.get(i).equals(sides.get(j))) {
-                    sides.remove(i);
-                    sides.remove(j);
+                    sides.set(i, null);
+                    sides.set(j, null);
                 }
             }
         }
+        sides.removeAll(Collections.singleton(null));
         return sides.toArray(new HexagonSide[0]);
     }
 
@@ -95,7 +100,6 @@ public class HexagonalGrid {
             return false;
         }
         HexagonalGrid other = (HexagonalGrid)obj;
-
         return other.orientation.equals(orientation) && other.origin.equals(origin) && other.size.equals(size) && other.mort.equals(mort);
     }
 }
