@@ -1,7 +1,15 @@
 # HexagonLibrary
+
+![](https://img.shields.io/github/tag/pukpukov/HexagonLibrary-Java?style=for-the-badge&logo=appveyor)
+
+![](https://img.shields.io/github/issues/pukpukov/HexagonLibrary-Java?style=for-the-badge&logo=appveyor) ![](https://img.shields.io/tokei/lines/github/pukpukov/HexagonLibrary-Java?style=for-the-badge&logo=appveyor)
+
 ## Описание
 Универсальная библиотека на Java для создания гексагональных сеток и работы с ними. 
 ## Преимущества
+
+![](https://img.shields.io/codefactor/grade/github/PukPukov/HexagonLibrary-Java?style=for-the-badge&logo=appveyor) ![](https://img.shields.io/codeclimate/maintainability-percentage/PukPukov/HexagonLibrary-Java?style=for-the-badge&logo=appveyor)
+
 - Осевая система координат
 - Деление гексагона на компоненты для реализации любых задач
 - Широчайшее API
