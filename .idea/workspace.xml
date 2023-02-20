@@ -7,7 +7,7 @@
     <list default="true" id="3ff08054-c0ac-4155-992e-3ca1666111f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/HexagonRegion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/HexagonRegion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/HexagonSide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/HexagonSide.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/test/RegionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/test/RegionTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

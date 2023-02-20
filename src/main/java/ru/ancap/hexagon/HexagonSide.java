@@ -1,9 +1,9 @@
 package ru.ancap.hexagon;
 
-import javafx.util.Pair;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import ru.ancap.commons.Pair;
 import ru.ancap.hexagon.common.CyclicNumberAxis;
 
 @AllArgsConstructor
