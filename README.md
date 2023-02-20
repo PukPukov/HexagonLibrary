@@ -33,7 +33,6 @@
 | Hexagon | .vertexes() | Возвращает массив всех вершин гексагона |
 | Hexagon | .vertexPosition(int index) | Возвращает точку вершины гексагона |
 | Hexagon | .neighbor(int index) | Возвращает соседа по индексу |
-| Hexagon | .neighbor(HexagonalDirection hexagonalDirection) | Возвращает соседа по гексагональному направлению |
 | Hexagon | .neighbors() | Возвращает упорядоченно (индекс соседа соответствует индексу стороны) всех соседей 1 порядка |
 | Hexagon | .neighbors(int layers) | Возвращает неупорядоченно всех соседей указанного порядка, работает быстрее |
 | Side | .nexagonalDirection() | Возвращает гексагональное направление этой стороны |
