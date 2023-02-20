@@ -1,18 +1,16 @@
 # HexagonLibrary
-
-![](https://img.shields.io/github/issues/pukpukov/HexagonLibrary-Java?style=for-the-badge&logo=appveyor) ![](https://img.shields.io/tokei/lines/github/pukpukov/HexagonLibrary-Java?style=for-the-badge&logo=appveyor)
+![](https://img.shields.io/tokei/lines/github/pukpukov/HexagonLibrary-Java?style=for-the-badge&logo=appveyor)
 
 ## Описание
 Универсальная библиотека на Java для создания гексагональных сеток и работы с ними. 
 ## Преимущества
-
-![](https://img.shields.io/codefactor/grade/github/ancap-kun/HexagonLibrary?style=for-the-badge&logo=appveyor)
 
 - Осевая система координат
 - Деление гексагона на компоненты для реализации любых задач
 - Широчайшее API
 - Набор базовых методов для работы с сетками шестиугольников (Перевод пиксельных координат в осевые, нахождение соседей шестиугольника, нахождение координат вершин шестиугольника...)
 - Набор дополнительных методов (Создание регионов, работа с массивами гексагонов, кодирование гексагона...)
+
 ## Пример кода
 ```java
     // Создание гексагональной сетки. Ориентация, начало координат, размер гексагона, настройки Morton64 (в большинстве случаев менять не надо)
@@ -49,3 +47,22 @@
 | Объект | Конструктор |
 |----:|:----------|
 | HexagonalGrid | new HexagonalGrid(Orientation orientation, Point origin, Point size) |
+
+## Maven
+
+[![](https://jitpack.io/v/ancap-kun/HexagonLibrary.svg)](https://jitpack.io/#ancap-kun/HexagonLibrary)
+
+```xml
+<repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+</repository>
+```
+
+```xml
+<dependency>
+    <groupId>com.github.ancap-kun</groupId>
+    <artifactId>HexagonLibrary</artifactId>
+    <version>Tag</version>
+</dependency>
+```
