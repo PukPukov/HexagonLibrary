@@ -1,35 +1,28 @@
 package ru.ancap.hexagon;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@AllArgsConstructor
+@EqualsAndHashCode @ToString
 public class FractionalHexagon {
+
+    private HexagonalGrid grid;
     private double q;
     private double r;
-    private HexagonalGrid grid;
 
-    public FractionalHexagon(double q, double r, HexagonalGrid grid) {
-        this.q = q;
-        this.r = r;
-        this.grid = grid;
-    }
+    public double q() {return this.q;}
+    public double r() {return this.r;}
+    public double s() {return -(this.q + this.r);}
 
-    public double getQ() {
-        return q;
-    }
-
-    public double getR() {
-        return r;
-    }
-
-    public double getS() {
-        return -(q + r);
-    }
-
-    public Hexagon toHexagon() {
-        long q = Math.round(getQ());
-        long r = Math.round(getR());
-        long s = Math.round(getS());
-        double qDiff = Math.abs(q - getQ());
-        double rDiff = Math.abs(r - getR());
-        double sDiff = Math.abs(s - getS());
+    public Hexagon asStrict() {
+        long q = Math.round(this.q);
+        long r = Math.round(this.r);
+        long s = Math.round(this.s());
+        double qDiff = Math.abs(q - this.q);
+        double rDiff = Math.abs(r - this.r);
+        double sDiff = Math.abs(s - this.s());
 
         if (qDiff > rDiff && qDiff > sDiff) {
             q = -(r + s);
@@ -37,24 +30,7 @@ public class FractionalHexagon {
             r = -(q + s);
         }
 
-        return new Hexagon(grid, q, r);
+        return new Hexagon(this.grid, q, r);
     }
-
-    @Override
-    public String toString() {
-        return String.format("fraction_hexagon{q: %d, r: %d}", q, r);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!FractionalHexagon.class.isAssignableFrom(obj.getClass())) {
-            return false;
-        }
-        FractionalHexagon other = (FractionalHexagon)obj;
-
-        return other.q == q && other.r == r;
-    }
+    
 }

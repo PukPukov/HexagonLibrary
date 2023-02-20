@@ -1,129 +1,82 @@
 package ru.ancap.hexagon;
 
-import ru.ancap.hexagon.HexagonComponents.HexagonSide;
-import ru.ancap.hexagon.HexagonComponents.HexagonVertex;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import ru.ancap.commons.Pair;
+import ru.ancap.hexagon.common.Point;
+import ru.ancap.hexagon.morton.Morton64;
 
+import java.util.*;
+
+@AllArgsConstructor
+@EqualsAndHashCode @ToString
 public class Hexagon {
-    private long q;
-    private long r;
-    private HexagonalGrid grid;
 
-    public Hexagon(HexagonalGrid grid, long q, long r) {
-        this.q = q;
-        this.r = r;
-        this.grid = grid;
-    }
+    private final HexagonalGrid grid;
+    private final long q;
+    private final long r;
 
-    public Hexagon(Hexagon hexagon) {
-        long q = hexagon.getQ();
-        long r = hexagon.getR();
-        HexagonalGrid grid = hexagon.getGrid();
-        this.q = q;
-        this.r = r;
-        this.grid = grid;
-    }
-
-    public long getQ() {
-        return q;
-    }
-
-    public long getR() {
-        return r;
-    }
-
-    public long getS() {
-        return -(q + r);
-    }
-
-    public long getCode() {
-        Morton64 mort = this.grid.getMort();
+    public long q() {return q;}
+    public long r() {return r;}
+    public long s() {return -(q + r);}
+    public HexagonalGrid grid() {return this.grid;}
+    
+    public long code() {
+        Morton64 mort = this.grid.morton();
         return mort.spack(this.q, this.r);
     }
 
-    public HexagonalGrid getGrid() {
-        return this.grid;
-    }
-
-    public Point getCenter() {
-        Orientation orientation = grid.getOrientation();
-        Point size = grid.getSize();
-        Point origin = grid.getOrigin();
-        double x = (orientation.getF()[0] * this.q + orientation.getF()[1] * this.r) * size.getX() + origin.getX();
-        double y = (orientation.getF()[2] * this.q + orientation.getF()[3] * this.r) * size.getY() + origin.getY();
+    public Point center() {
+        GridOrientation gridOrientation = this.grid.orientation();
+        Point size = this.grid.size();
+        Point origin = this.grid.origin();
+        double x = (gridOrientation.f()[0] * this.q + gridOrientation.f()[1] * this.r) * size.x() + origin.x();
+        double y = (gridOrientation.f()[2] * this.q + gridOrientation.f()[3] * this.r) * size.y() + origin.y();
         return new Point(x, y);
     }
 
-    public HexagonSide getSide(int index) {
+    public HexagonSide side(int index) {
         return new HexagonSide(this, index);
     }
 
-    public HexagonSide[] getSides() {
-        HexagonSide[] hexagonSides = new HexagonSide[6];
+    public Set<HexagonSide> sides() {
+        Set<HexagonSide> hexagonSides = new HashSet<>();
         for (int i = 0; i<6; i++) {
-            hexagonSides[i] = this.getSide(i);
+            hexagonSides.add(this.side(i));
         }
         return hexagonSides;
     }
 
-    public HexagonVertex getVertex(int index) {
+    public HexagonVertex vertex(int index) {
         return new HexagonVertex(this, index);
     }
 
-    public HexagonVertex[] getVertexes() {
-        HexagonVertex[] hexagonVertices = new HexagonVertex[6];
+    public List<HexagonVertex> vertexes() {
+        List<HexagonVertex> hexagonVertexes = new ArrayList<>();
         for (int i = 0; i<6; i++) {
-            hexagonVertices[i] = this.getVertex(i);
+            hexagonVertexes.add(this.vertex(i));
         }
-        return hexagonVertices;
+        return hexagonVertexes;
     }
 
-    public Point getVertexPosition(int index) {
-        HexagonVertex hexagonVertex = new HexagonVertex(this, index);
-        return hexagonVertex.getPosition();
+    public Hexagon neighbor(int index) {
+        Pair<Integer, Integer> modifier = this.modifierMap.get(index);
+        return new Hexagon(this.grid, this.q + modifier.getKey(), this.r + modifier.getValue());
     }
-
-    public Point[] getVertexPositions() {
-        Point[] corners = new Point[6];
-        for (int i = 0; i < 6; i++) {
-            corners[i] = this.getVertexPosition(i);
-        }
-        return corners;
-    }
-
-    public Hexagon getNeighbor(int index) {
-        HexagonalDirection hexagonalDirection = new HexagonalDirection(index);
-        return this.getNeighbor(hexagonalDirection);
-    }
-    public Hexagon getNeighbor(HexagonalDirection hexagonalDirection) {
-        int hexagonalDirectionIndex = hexagonalDirection.getIndex();
-        if (hexagonalDirectionIndex == 0) {
-            return new Hexagon(this.grid, this.q+1, this.r);
-        }
-        if (hexagonalDirectionIndex == 1) {
-            return new Hexagon(this.grid, this.q, this.r+1);
-        }
-        if (hexagonalDirectionIndex == 2) {
-            return new Hexagon(this.grid, this.q-1, this.r+1);
-        }
-        if (hexagonalDirectionIndex == 3) {
-            return new Hexagon(this.grid, this.q-1, this.r);
-        }
-        if (hexagonalDirectionIndex == 4) {
-            return new Hexagon(this.grid, this.q, this.r-1);
-        }
-        return new Hexagon(this.grid, this.q+1, this.r-1);
-    }
-    public Hexagon[] getNeighbors() {
-        Hexagon[] hexagons = new Hexagon[6];
-        for (int i = 0; i<6; i++) {
-            hexagons[i] = getNeighbor(i);
-        }
-        return hexagons;
-    }
-    public Hexagon[] getNeighbors(int layers) {
-        int total = (layers + 1) * layers * 3;
-        Hexagon[] neighbors = new Hexagon[total];
-        int i = 0;
+    
+    @ToString.Exclude
+    private final Map<Integer, Pair<Integer, Integer>> modifierMap = Map.of(
+        0, new Pair<>( 1,  0),
+        1, new Pair<>( 0,  1),
+        2, new Pair<>(-1,  1),
+        3, new Pair<>(-1,  0),
+        4, new Pair<>( 0, -1),
+        5, new Pair<>( 1, -1)
+    );
+    
+    public Set<Hexagon> neighbors(int layers) {
+        Set<Hexagon> neighbors = new HashSet<>();
         for (long q = -layers; q <= layers; q++) {
             long r1 = Math.max(-layers, -q - layers);
             long r2 = Math.min(layers, -q + layers);
@@ -131,38 +84,14 @@ public class Hexagon {
                 if (q == 0 && r == 0) {
                     continue;
                 }
-                neighbors[i] = new Hexagon(this.grid, q + this.q, r + this.r);
-                i++;
+                neighbors.add(new Hexagon(this.grid, q + this.q, r + this.r));
             }
         }
         return neighbors;
     }
 
-    public boolean isNeighborOf(Hexagon hexagon) {
-        Hexagon[] hexagons = this.getNeighbors(1);
-        for (int i = 0; i<hexagons.length; i++) {
-            if (hexagons[i].equals(hexagon)) {
-                return true;
-            }
-        }
-        return false;
+    public boolean neighborOf(Hexagon hexagon) {
+        return this.neighbors(1).contains(hexagon);
     }
-
-    @Override
-    public String toString() {
-        return String.format("%d;%d", q, r);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!Hexagon.class.isAssignableFrom(obj.getClass())) {
-            return false;
-        }
-        Hexagon other = (Hexagon)obj;
-
-        return other.toString().equals(this.toString());
-    }
+    
 }

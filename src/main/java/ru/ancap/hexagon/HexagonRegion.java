@@ -1,129 +1,64 @@
 package ru.ancap.hexagon;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
+@RequiredArgsConstructor(access = AccessLevel.MODULE)
+@EqualsAndHashCode @ToString
 public class HexagonRegion {
-    HexagonalGrid grid;
-    private Hexagon[] hexagones;
-    private HashMap<Long, Integer> lookup;
+    
+    private final HexagonalGrid grid;
+    private final Set<Hexagon> hexagons;
 
-    public HexagonRegion(HexagonalGrid grid, Point[] geometry) {
-        this.grid = grid;
-
-        int len = geometry.length;
-        if (geometry[0] == geometry[len - 1]) {
-            len -= 1;
+    public HexagonalGrid grid() {return this.grid;}
+    public Set<Hexagon> hexagons() {return this.hexagons;}
+    
+    public Set<HexagonSide> bounds() {
+        /*List<HexagonSide> sides = new ArrayList<>();
+        for (Hexagon hexagon : this.hexagons) sides.addAll(hexagon.sides());
+        sides = sides.stream().map(HexagonSide::absolute).collect(Collectors.toList());
+        List<HexagonSide> operateSides = new ArrayList<>(sides);
+        Set<HexagonSide> identityChecker = new HashSet<>();
+        for(HexagonSide side : sides) {
+            if (identityChecker.contains(side)) operateSides.remove(side);
+            else identityChecker.add(side);
         }
-
-        Hexagon hexagon = grid.getHexagon(geometry[0]);
-        long q1 = hexagon.getQ();
-        long q2 = hexagon.getQ();
-        long r1 = hexagon.getR();
-        long r2 = hexagon.getR();
-
-        for (int i = 1; i < len; i++) {
-            hexagon = grid.getHexagon(geometry[i]);
-            q1 = Math.min(q1, hexagon.getQ());
-            q2 = Math.max(q2, hexagon.getQ());
-            r1 = Math.min(r1, hexagon.getR());
-            r2 = Math.max(r2, hexagon.getR());
+        return new HashSet<>(operateSides);
+        
+         */
+        ArrayList<HexagonSide> sides = new ArrayList<>();
+        Hexagon[] hexagons1 = this.hexagons.toArray(new Hexagon[0]);
+        for (int i = 0; i<hexagons1.length; i++) {
+            HexagonSide[] hexagonSides = hexagons1[i].sides().toArray(new HexagonSide[0]);
+            for (int j = 0; j<hexagonSides.length; j++) {
+                hexagonSides[j] = hexagonSides[j].absolute();
+                sides.add(hexagonSides[j]);
+            }
         }
-
-        q1 -= 1;
-        q2 += 1;
-        r1 -= 1;
-        r2 += 1;
-
-        ArrayList<Hexagon> hexagones = new ArrayList<>();
-
-        for (long q = q1; q <= q2; q++) {
-            for (long r = r1; r <= r2; r++) {
-                hexagon = new Hexagon(grid, q, r);
-                Point[] corners = hexagon.getVertexPositions();
-                boolean add = false;
-
-                for (int c = 0; c < 6; c++) {
-                    if (pointInGeometry(geometry, len, corners[c])) {
-                        add = true;
-                        break;
-                    }
+        for(int i=0; i<sides.size(); i++) {
+            for (int j=i+1; j<sides.size(); j++) {
+                if (sides.get(i) == null || sides.get(j) == null) {
+                    continue;
                 }
-
-                if (!add) {
-                    for (int i = 0; i < len; i++) {
-                        if (pointInGeometry(corners, 6, geometry[i])) {
-                            add = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (add) {
-                    hexagones.add(hexagon);
+                if(sides.get(i).equals(sides.get(j))) {
+                    sides.set(i, null);
+                    sides.set(j, null);
                 }
             }
         }
-
-        this.hexagones = hexagones.toArray(new Hexagon[0]);
-
-        lookup = new HashMap<>();
-        for (int i = 0; i < this.hexagones.length; i++) {
-            lookup.put(this.hexagones[i].getCode(), i);
-        }
-    }
-
-    public Hexagon[] getHexagones() {
-        return hexagones;
+        sides.removeAll(Collections.singleton(null));
+        return new HashSet<>(sides);
     }
 
     public boolean contains(Hexagon hexagon) {
-        return lookup.containsKey(hexagon.getCode());
+        return this.hexagons.contains(hexagon);
     }
-
-    private boolean pointInGeometry(Point[] geometry, int len, Point point) {
-        boolean contains = intersectsWithRaycast(point, geometry[len - 1], geometry[0]);
-        for (int i = 1; i < len; i++) {
-            if (intersectsWithRaycast(point, geometry[i - 1], geometry[i])) {
-                contains = !contains;
-            }
-        }
-        return contains;
-    }
-
-    private boolean intersectsWithRaycast(Point point, Point start, Point end) {
-        if (start.getY() > end.getY()) {
-            return intersectsWithRaycast(point, end, start);
-        }
-
-        while (point.getY() == start.getY() || point.getY() == end.getY()) {
-            double newY = Math.nextAfter(point.getY(), Double.POSITIVE_INFINITY);
-            point = new Point(point.getX(), newY);
-        }
-
-        if (point.getY() < start.getY() || point.getY() > end.getY()) {
-            return false;
-        }
-
-        if (start.getX() > end.getX()) {
-            if (point.getX() > start.getX()) {
-                return false;
-            }
-            if (point.getX() < end.getX()) {
-                return true;
-            }
-        } else {
-            if (point.getX() > end.getX()) {
-                return false;
-            }
-            if (point.getX() < start.getX()) {
-                return true;
-            }
-        }
-
-        double raySlope = (point.getY() - start.getY()) / (point.getX() - start.getX());
-        double diagSlope = (end.getY() - start.getY()) / (end.getX() - start.getX());
-
-        return raySlope >= diagSlope;
-    }
+    
 }
