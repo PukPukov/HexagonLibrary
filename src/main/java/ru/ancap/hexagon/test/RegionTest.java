@@ -1,6 +1,6 @@
 package ru.ancap.hexagon.test;
 
-import javafx.application.Application;
+/* import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -12,11 +12,11 @@ import ru.ancap.hexagon.common.Figure;
 import ru.ancap.hexagon.common.Point;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Set; */
 
-public class RegionTest extends Application {
+public class RegionTest /* extends Application */ {
 
-    private static final int WIDTH = 1500;
+    /* private static final int WIDTH = 1500;
     private static final int HEIGHT = 1000;
 
     private final HexagonalGrid grid = new HexagonalGrid(GridOrientation.FLAT, new Point(100, 100), new Point(0, 0));
@@ -79,6 +79,6 @@ public class RegionTest extends Application {
 
     public static void main(String[] args) {
         launch(args);
-    }
+    } */
     
 }
