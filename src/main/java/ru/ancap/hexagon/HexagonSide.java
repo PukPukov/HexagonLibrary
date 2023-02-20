@@ -1,96 +1,42 @@
-package ru.ancap.hexagon.HexagonComponents;
+package ru.ancap.hexagon;
 
-import ru.ancap.hexagon.Hexagon;
-import ru.ancap.hexagon.HexagonalDirection;
-import ru.ancap.hexagon.Point;
+import javafx.util.Pair;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import ru.ancap.hexagon.common.CyclicNumberAxis;
 
+@AllArgsConstructor
+@EqualsAndHashCode @ToString
 public class HexagonSide {
+    
+    private final Hexagon baseHexagon;
+    private final int direction;
 
-    private Hexagon baseHexagon;
-    private int sideIndex;
+    public int direction() {return this.direction;}
+    public Hexagon base() {return this.baseHexagon;}
 
-    public HexagonSide(Hexagon baseHexagon, int sideIndex) {
-        this.baseHexagon = baseHexagon;
-        this.sideIndex = sideIndex;
+    public Pair<Hexagon, Hexagon> connected() {
+        return new Pair<>(
+            this.baseHexagon,
+            this.baseHexagon.neighbor(this.direction())
+        );
     }
 
-    public Hexagon getBaseHexagon() {
-        return baseHexagon;
+    public Pair<HexagonVertex, HexagonVertex> ends() {
+        return new Pair<>(
+            this.baseHexagon.vertex(CyclicNumberAxis.HEXAGONAL.offset(this.direction, 0)),
+            this.baseHexagon.vertex(CyclicNumberAxis.HEXAGONAL.offset(this.direction, 1))
+        );
     }
 
-    public int getIndex() {
-        return this.sideIndex;
+    public HexagonSide equal() {
+        return new HexagonSide(this.baseHexagon.neighbor(this.direction()), CyclicNumberAxis.HEXAGONAL.offset(this.direction, 3));
     }
 
-    public HexagonalDirection getHexagonalDirection() {
-        return new HexagonalDirection(this.getIndex());
+    public HexagonSide absolute() {
+        if (this.direction > 2) return new HexagonSide(this.baseHexagon.neighbor(this.direction), CyclicNumberAxis.HEXAGONAL.offset(this.direction, -3));
+        else return this;
     }
 
-    public Hexagon getConnected() {
-        HexagonalDirection hexagonalDirection = this.getHexagonalDirection();
-        return baseHexagon.getNeighbor(hexagonalDirection);
-    }
-
-    public Point[] getEnds() {
-        Point[] points = new Point[2];
-        if (this.getIndex() < 5) {
-            points[0] = new HexagonVertex(this.getBaseHexagon(), this.getIndex()).getPosition();
-            points[1] = new HexagonVertex(this.getBaseHexagon(), this.getIndex()+1).getPosition();
-        }
-        if (this.getIndex() == 5) {
-            points[0] = new HexagonVertex(this.getBaseHexagon(), 5).getPosition();
-            points[1] = new HexagonVertex(this.getBaseHexagon(), 0).getPosition();
-        }
-        return points;
-    }
-
-    public HexagonSide getEqual() {
-        if (this.sideIndex == 0) {
-            return new HexagonSide(this.baseHexagon, 3);
-        }
-        if (this.sideIndex == 1) {
-            return new HexagonSide(this.baseHexagon, 4);
-        }
-        if (this.sideIndex == 2) {
-            return new HexagonSide(this.baseHexagon, 5);
-        }
-        if (this.sideIndex == 3) {
-            return new HexagonSide(this.baseHexagon, 0);
-        }
-        if (this.sideIndex == 4) {
-            return new HexagonSide(this.baseHexagon, 1);
-        }
-        return new HexagonSide(this.baseHexagon, 2);
-    }
-
-    public HexagonSide getAbsolute() {
-        if (this.sideIndex > 2) {
-            if (this.sideIndex == 3) {
-                return new HexagonSide(this.baseHexagon.getNeighbor(3), 0);
-            }
-            if (this.sideIndex == 4) {
-                return new HexagonSide(this.baseHexagon.getNeighbor(4), 1);
-            }
-            if (this.sideIndex == 5) {
-                return new HexagonSide(this.baseHexagon.getNeighbor(5), 2);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("hexagonSide{baseHexagon: %s, sideIndex: %i}", this.baseHexagon.toString(), this.sideIndex);
-    }
-
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!HexagonSide.class.isAssignableFrom(obj.getClass())) {
-            return false;
-        }
-        HexagonSide other = (HexagonSide)obj;
-        return other.getBaseHexagon().equals(this.baseHexagon) && other.getIndex() == this.sideIndex;
-    }
 }

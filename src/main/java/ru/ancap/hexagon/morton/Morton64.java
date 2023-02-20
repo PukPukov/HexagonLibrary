@@ -1,10 +1,13 @@
-package ru.ancap.hexagon;
+package ru.ancap.hexagon.morton;
 
-import ru.ancap.hexagon.Exceptions.LibraryException;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 
+@EqualsAndHashCode @ToString
 public class Morton64 {
+    
     private long dimensions;
     private long bits;
     private long[] masks;
@@ -13,7 +16,7 @@ public class Morton64 {
 
     public Morton64(long dimensions, long bits) {
         if (dimensions <= 0 || bits <= 0 || dimensions * bits > 64) {
-            throw new LibraryException(String.format("can't make morton64 with %d dimensions and %d bits", dimensions, bits));
+            throw new RuntimeException(String.format("can't make morton64 with %d dimensions and %d bits", dimensions, bits));
         }
 
         this.dimensions = dimensions;
@@ -118,19 +121,19 @@ public class Morton64 {
 
     private void dimensionsCheck(long dimensions) {
         if (this.dimensions != dimensions) {
-            throw new LibraryException(String.format("morton64 with %d dimensions received %d values", this.dimensions, dimensions));
+            throw new RuntimeException(String.format("morton64 with %d dimensions received %d values", this.dimensions, dimensions));
         }
     }
 
     private void valueCheck(long value) {
         if (value < 0 || value >= (1L << this.bits)) {
-            throw new LibraryException(String.format("morton64 with %d bits per dimension received %d to pack", this.bits, value));
+            throw new RuntimeException(String.format("morton64 with %d bits per dimension received %d to pack", this.bits, value));
         }
     }
 
     private long shiftSign(long value) {
         if (value >= (1L << (bits - 1)) || value <= -(1L << (bits - 1))) {
-            throw new LibraryException(String.format("morton64 with %d bits per dimension received signed %d to pack", this.bits, value));
+            throw new RuntimeException(String.format("morton64 with %d bits per dimension received signed %d to pack", this.bits, value));
         }
 
         if (value < 0) {
@@ -163,20 +166,4 @@ public class Morton64 {
         return code;
     }
 
-    @Override
-    public String toString() {
-        return String.format("morton64{dimensions: %d, bits: %d}", dimensions, bits);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!Morton64.class.isAssignableFrom(obj.getClass())) {
-            return false;
-        }
-        Morton64 other = (Morton64)obj;
-
-        return other.dimensions == dimensions && other.bits == bits;
-    }}
+}

@@ -1,91 +1,43 @@
-package ru.ancap.hexagon.HexagonComponents;
+package ru.ancap.hexagon;
 
-import ru.ancap.hexagon.Hexagon;
-import ru.ancap.hexagon.HexagonalGrid;
-import ru.ancap.hexagon.Orientation;
-import ru.ancap.hexagon.Point;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import ru.ancap.hexagon.common.CyclicNumberAxis;
+import ru.ancap.hexagon.common.Point;
 
+import java.util.Set;
+
+@AllArgsConstructor
+@EqualsAndHashCode @ToString
 public class HexagonVertex {
+    
+    private final Hexagon baseHexagon;
+    private final int vertexIndex;
 
-    private Hexagon baseHexagon;
-    private int vertexIndex;
-
-    public HexagonVertex(Hexagon hexagon, int vertexIndex) {
-        this.baseHexagon = hexagon;
-        this.vertexIndex = vertexIndex;
-    }
-
-    public int getVertexIndex() {
+    public int vertexIndex() {
         return this.vertexIndex;
     }
 
-    public Hexagon[] getConnected() {
-        Hexagon[] connected = new Hexagon[2];
-        if (this.vertexIndex == 0) {
-            connected[0] = baseHexagon.getNeighbor(5);
-            connected[1] = baseHexagon.getNeighbor(0);
-        }
-        if (this.vertexIndex == 1) {
-            connected[0] = baseHexagon.getNeighbor(0);
-            connected[1] = baseHexagon.getNeighbor(1);
-        }
-        if (this.vertexIndex == 2) {
-            connected[0] = baseHexagon.getNeighbor(1);
-            connected[1] = baseHexagon.getNeighbor(2);
-            return connected;
-        }
-        if (this.vertexIndex == 3) {
-            connected[0] = baseHexagon.getNeighbor(2);
-            connected[1] = baseHexagon.getNeighbor(3);
-            return connected;
-        }
-        if (this.vertexIndex == 4) {
-            connected[0] = baseHexagon.getNeighbor(3);
-            connected[1] = baseHexagon.getNeighbor(4);
-            return connected;
-        }
-        connected[0] = baseHexagon.getNeighbor(4);
-        connected[1] = baseHexagon.getNeighbor(5);
-        return connected;
+    public Set<Hexagon> connected() {
+        return Set.of(
+            this.baseHexagon,
+            this.baseHexagon.neighbor(this.vertexIndex),
+            this.baseHexagon.neighbor(CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 1))
+        );
     }
 
-    public HexagonVertex[] getEquals() {
-        Hexagon[] connected = this.getConnected();
-        HexagonVertex[] equals = new HexagonVertex[2];
-        if (this.vertexIndex == 0) {
-            equals[0] = new HexagonVertex(connected[0], 2);
-            equals[1] = new HexagonVertex(connected[1], 4);
-            return equals;
-        }
-        if (this.vertexIndex == 1) {
-            equals[0] = new HexagonVertex(connected[0], 3);
-            equals[1] = new HexagonVertex(connected[1], 5);
-            return equals;
-        }
-        if (this.vertexIndex == 2) {
-            equals[0] = new HexagonVertex(connected[0], 4);
-            equals[1] = new HexagonVertex(connected[1], 0);
-            return equals;
-        }
-        if (this.vertexIndex == 3) {
-            equals[0] = new HexagonVertex(connected[0], 5);
-            equals[1] = new HexagonVertex(connected[1], 1);
-            return equals;
-        }
-        if (this.vertexIndex == 4) {
-            equals[0] = new HexagonVertex(connected[0], 0);
-            equals[1] = new HexagonVertex(connected[1], 2);
-            return equals;
-        }
-        equals[0] = new HexagonVertex(connected[0], 1);
-        equals[1] = new HexagonVertex(connected[1], 3);
-        return equals;
+    public Set<HexagonVertex> equivalents() {
+        return Set.of(
+            new HexagonVertex(this.baseHexagon.neighbor(this.vertexIndex),                                       CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 2)),
+            new HexagonVertex(this.baseHexagon.neighbor(CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 1)), CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 4))
+        );
     }
 
-    public HexagonVertex getAbsolute() {
-        HexagonVertex[] equals = this.getEquals();
+    public HexagonVertex absolute() {
+        Set<HexagonVertex> equals = this.equivalents();
         for (HexagonVertex equal : equals) {
-            int equalVertexNumber = equal.getVertexIndex();
+            int equalVertexNumber = equal.vertexIndex();
             if (equalVertexNumber == 0 || equalVertexNumber == 3) {
                 return equal;
             }
@@ -93,14 +45,13 @@ public class HexagonVertex {
         return this;
     }
 
-    public Point getPosition() {
-        HexagonalGrid grid = baseHexagon.getGrid();
-        Point center = baseHexagon.getCenter();
-        Point size = grid.getSize();
-        Orientation orientation = grid.getOrientation();
-        double x = size.getX() * orientation.getCosinuses()[this.vertexIndex] + center.getX();
-        double y = size.getY() * orientation.getSinuses()[this.vertexIndex] + center.getY();
-        Point vertexPosition = new Point(x, y);
-        return vertexPosition;
+    public Point position() {
+        HexagonalGrid grid = this.baseHexagon.grid();
+        Point center = this.baseHexagon.center();
+        Point size = grid.size();
+        GridOrientation gridOrientation = grid.orientation();
+        double x = size.x() * gridOrientation.cosinuses()[this.vertexIndex] + center.x();
+        double y = size.y() * gridOrientation.sinuses()[this.vertexIndex] + center.y();
+        return new Point(x, y);
     }
 }
