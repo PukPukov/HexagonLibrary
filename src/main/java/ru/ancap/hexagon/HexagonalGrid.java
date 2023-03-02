@@ -3,9 +3,12 @@ package ru.ancap.hexagon;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import ru.ancap.algorighm.compact.Morton64Compactor;
+import ru.ancap.algorithm.walkthrough.Walkthrough;
 import ru.ancap.hexagon.common.Figure;
 import ru.ancap.hexagon.common.Point;
-import ru.ancap.hexagon.morton.Morton64;
+import ru.ancap.hexagon.walkthrough.HexagonMethodApplier;
+import ru.ancap.hexagon.walkthrough.HexagonalPolygonWalkthroughOperator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,7 +23,7 @@ public class HexagonalGrid {
     private final GridOrientation gridOrientation;
     private final Point size;
     private final Point origin;
-    @ToString.Exclude private final Morton64 morton = new Morton64(2, 32);
+    @ToString.Exclude private final Morton64Compactor morton = new Morton64Compactor();
 
     public HexagonalGrid(HexagonalGrid hexagonalGrid) {
         this(hexagonalGrid.gridOrientation, hexagonalGrid.size, hexagonalGrid.origin);
@@ -29,10 +32,10 @@ public class HexagonalGrid {
     public GridOrientation orientation() {return this.gridOrientation;}
     public Point origin() {return this.origin;}
     public Point size() {return this.size;}
-    public Morton64 morton() {return this.morton;}
+    public Morton64Compactor morton() {return this.morton;}
 
     public Hexagon hexagon(long code) {
-        long[] qr = morton.sunpack(code);
+        int[] qr = this.morton.unpack(code);
         return new Hexagon(this, qr[0], qr[1]);
     }
 
@@ -56,8 +59,16 @@ public class HexagonalGrid {
     public HexagonRegion region(Set<Hexagon> hexagons) {
         return new HexagonRegion(this, hexagons);
     }
-
+    
     public HexagonRegion region(Figure figure) {
+        return new HexagonRegion(this, new Walkthrough<>(
+            this.hexagon(new Point(600, 600)),
+            new HexagonalPolygonWalkthroughOperator(figure.toPolygon()),
+            HexagonMethodApplier.INSTANCE
+        ).walkthrough().collected());
+    }
+    
+    public HexagonRegion regionByIntersection(Figure figure) {
         List<Point> figureVertexes = figure.vertexes();
         List<Hexagon> hexagons = new ArrayList<>();
         int len = figureVertexes.size();

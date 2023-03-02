@@ -1,14 +1,12 @@
 package ru.ancap.hexagon.common;
 
-import lombok.AllArgsConstructor;
-
+import java.awt.*;
 import java.util.List;
 
-@AllArgsConstructor
-public class Figure {
+public record Figure(List<Point> vertexes) {
     
-    private final List<Point> vertexes;
-    
-    public List<Point> vertexes() {return this.vertexes;}
+    public Polygon toPolygon() {
+        return PointsListToPolygon.INSTANCE.apply(this.vertexes());
+    }
     
 }

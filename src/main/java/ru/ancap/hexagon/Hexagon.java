@@ -3,11 +3,14 @@ package ru.ancap.hexagon;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import ru.ancap.algorighm.compact.Morton64Compactor;
 import ru.ancap.commons.Pair;
 import ru.ancap.hexagon.common.Point;
-import ru.ancap.hexagon.morton.Morton64;
+import ru.ancap.hexagon.common.PointsListToPolygon;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 @AllArgsConstructor
 @EqualsAndHashCode @ToString
@@ -22,9 +25,13 @@ public class Hexagon {
     public long s() {return -(q + r);}
     public HexagonalGrid grid() {return this.grid;}
     
+    public Polygon toPolygon() {
+        return PointsListToPolygon.INSTANCE.apply(this.vertexes().stream().map(HexagonVertex::position).toList());
+    }
+    
     public long code() {
-        Morton64 mort = this.grid.morton();
-        return mort.spack(this.q, this.r);
+        Morton64Compactor mort = this.grid.morton();
+        return mort.pack(this.q, this.r);
     }
 
     public Point center() {

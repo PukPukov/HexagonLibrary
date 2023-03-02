@@ -5,10 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ff08054-c0ac-4155-992e-3ca1666111f5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/jitpack.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/common/PointsListToPolygon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/drawer/FXRegionDrawer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/walkthrough/HexagonMethodApplier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/walkthrough/HexagonalPolygonWalkthroughOperator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/ancap/hexagon/direct/LegacyRegionTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/ancap/hexagon/direct/RegionTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/ancap/hexagon/lib/PolygonDrawer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/HexagonSide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/HexagonSide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/test/RegionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/test/RegionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/FractionalHexagon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/FractionalHexagon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/Hexagon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/Hexagon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/HexagonalGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/HexagonalGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/common/Figure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/common/Figure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/common/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/common/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/morton/Morton64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/ancap/hexagon/test/RegionTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/ancap/hexagon/common/CyclicNumberAxisTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/ancap/hexagon/direct/CyclicNumberAxisTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +35,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2Ly51xKCj95X2ZAqkCPXGi6aJ2Q" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -38,19 +56,87 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
+    "ignore.preview.features.used": "true",
     "last_opened_file_path": "D:/projects/dev/projects/lib/HexagonLibrary/src/main/java",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.14550781",
+    "project.structure.side.proportion": "0.12371135",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="ru.ancap.hexagon.walkthrough" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\projects\dev\projects\lib\HexagonLibrary\src\main\java" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\dev\projects\lib\HexagonLibrary\src\main\java" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ru.ancap.hexagon" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ru.ancap.hexagon.test" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.RegionTest">
+    <configuration name="CompactorBenchmark" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.ancap.hexagon.bench.CompactorBenchmark" />
+      <module name="HexagonLibrary" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.ancap.hexagon.bench.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LegacyRegionTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.ancap.hexagon.direct.LegacyRegionTest" />
+      <module name="HexagonLibrary" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.ancap.hexagon.lib.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegionTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.ancap.hexagon.direct.RegionTest" />
+      <module name="HexagonLibrary" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.ancap.hexagon.lib.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CompactorTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HexagonLibrary" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.ancap.hexagon.direct.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.ancap.hexagon.direct" />
+      <option name="MAIN_CLASS_NAME" value="ru.ancap.hexagon.direct.CompactorTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="install" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -77,6 +163,24 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.RegionTest" />
+        <item itemvalue="Application.LegacyRegionTest" />
+        <item itemvalue="Application.CompactorBenchmark" />
+        <item itemvalue="JUnit.CompactorTest.test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3ff08054-c0ac-4155-992e-3ca1666111f5" name="Changes" comment="" />
+      <created>1677717558153</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1677717558153</updated>
+    </task>
+    <servers />
+  </component>
 </project>
