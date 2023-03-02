@@ -12,6 +12,7 @@ public class FractionalHexagon {
     private double q;
     private double r;
 
+    public HexagonalGrid grid() {return this.grid;}
     public double q() {return this.q;}
     public double r() {return this.r;}
     public double s() {return -(this.q + this.r);}
