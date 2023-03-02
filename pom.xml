@@ -6,7 +6,7 @@
 
     <groupId>ru.ancap</groupId>
     <artifactId>HexagonLibrary</artifactId>
-    <version>1.2-beta.1</version>
+    <version>1.2-beta.3</version>
 
     <properties>
         <java.version>19</java.version>
@@ -70,14 +70,14 @@
         <dependency>
             <groupId>com.github.ancap-dev.AlgorithmFramework</groupId>
             <artifactId>WalkthroughAPI</artifactId>
-            <version>1.1.4</version>
+            <version>1.1.6</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>com.github.ancap-dev.AlgorithmFramework</groupId>
             <artifactId>CompactAPI</artifactId>
-            <version>1.1.4</version>
+            <version>1.1.6</version>
             <scope>compile</scope>
         </dependency>
         
