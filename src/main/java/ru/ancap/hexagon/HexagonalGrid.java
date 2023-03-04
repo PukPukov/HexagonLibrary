@@ -39,11 +39,6 @@ public class HexagonalGrid {
         return new Hexagon(this, qr[0], qr[1]);
     }
 
-    public Hexagon hexagon(String code) {
-        String[] positions = code.split(";");
-        return new Hexagon(this, Long.parseLong(positions[0]), Long.parseLong(positions[1]));
-    }
-
     public Hexagon hexagon(Point point) {
         double x = (point.x() - this.origin.x()) / this.size.x();
         double y = (point.y() - this.origin.y()) / this.size.y();
