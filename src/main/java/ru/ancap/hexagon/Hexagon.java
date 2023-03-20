@@ -72,7 +72,7 @@ public class Hexagon {
         return new Hexagon(this.grid, this.q + modifier.getKey(), this.r + modifier.getValue());
     }
     
-    @ToString.Exclude
+    @ToString.Exclude @EqualsAndHashCode.Exclude
     private final Map<Integer, Pair<Integer, Integer>> modifierMap = Map.of(
         0, new Pair<>( 1,  0),
         1, new Pair<>( 0,  1),

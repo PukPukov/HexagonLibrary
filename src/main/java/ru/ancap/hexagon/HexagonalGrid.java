@@ -3,6 +3,7 @@ package ru.ancap.hexagon;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.jetbrains.annotations.NotNull;
 import ru.ancap.algorighm.compact.Morton64Compactor;
 import ru.ancap.algorithm.walkthrough.Walkthrough;
 import ru.ancap.hexagon.common.Figure;
@@ -20,11 +21,13 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode @ToString
 public class HexagonalGrid {
     
+    public static final HexagonalGrid CLASSIC = new HexagonalGrid(GridOrientation.FLAT, new Point(100, 100), new Point(0, 0));
+    
     private final GridOrientation gridOrientation;
     private final Point size;
     private final Point origin;
     @ToString.Exclude private final Morton64Compactor morton = new Morton64Compactor();
-
+    
     public HexagonalGrid(HexagonalGrid hexagonalGrid) {
         this(hexagonalGrid.gridOrientation, hexagonalGrid.size, hexagonalGrid.origin);
     }
@@ -113,7 +116,7 @@ public class HexagonalGrid {
         return new HexagonRegion(this, new HashSet<>(hexagons));
     }
 
-    private static boolean pointInGeometry(List<Point> geometry, int len, Point point) {
+    private static boolean pointInGeometry(@NotNull List<Point> geometry, int len, Point point) {
         boolean contains = intersectsWithRaycast(point, geometry.get(len - 1), geometry.get(0));
         for (int i = 1; i < len; i++) {
             if (intersectsWithRaycast(point, geometry.get(i - 1), geometry.get(i))) {
