@@ -3,8 +3,8 @@ package ru.ancap.hexagon;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import ru.ancap.algorithm.axis.CyclicNumberAxis;
 import ru.ancap.commons.Pair;
-import ru.ancap.hexagon.common.CyclicNumberAxis;
 
 @AllArgsConstructor
 @EqualsAndHashCode @ToString

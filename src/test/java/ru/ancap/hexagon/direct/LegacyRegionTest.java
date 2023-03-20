@@ -24,7 +24,8 @@ public class LegacyRegionTest extends Application {
 
         Polygon polygon = new Polygon(
             new int[]{500, 500, 700, 700},
-            new int[]{500, 700, 700, 500}, 4
+            new int[]{500, 700, 700, 500},
+            4
         );
         
         HexagonRegion region = this.grid.regionByIntersection(new Figure(List.of(

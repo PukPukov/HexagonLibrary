@@ -3,7 +3,7 @@ package ru.ancap.hexagon;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import ru.ancap.hexagon.common.CyclicNumberAxis;
+import ru.ancap.algorithm.axis.CyclicNumberAxis;
 import ru.ancap.hexagon.common.Point;
 
 import java.util.Set;
@@ -27,13 +27,6 @@ public class HexagonVertex {
         );
     }
 
-    public Set<HexagonVertex> equivalents() {
-        return Set.of(
-            new HexagonVertex(this.baseHexagon.neighbor(this.vertexIndex),                                       CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 2)),
-            new HexagonVertex(this.baseHexagon.neighbor(CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 1)), CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 4))
-        );
-    }
-
     public HexagonVertex absolute() {
         Set<HexagonVertex> equals = this.equivalents();
         for (HexagonVertex equal : equals) {
@@ -45,6 +38,13 @@ public class HexagonVertex {
         return this;
     }
 
+    private Set<HexagonVertex> equivalents() {
+        return Set.of(
+            new HexagonVertex(this.baseHexagon.neighbor(this.vertexIndex),                                       CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 2)),
+            new HexagonVertex(this.baseHexagon.neighbor(CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 1)), CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 4))
+        );
+    }
+
     public Point position() {
         HexagonalGrid grid = this.baseHexagon.grid();
         Point center = this.baseHexagon.center();
@@ -54,4 +54,5 @@ public class HexagonVertex {
         double y = size.y() * gridOrientation.sinuses()[this.vertexIndex] + center.y();
         return new Point(x, y);
     }
+    
 }
