@@ -1,21 +1,10 @@
 package ru.ancap.hexagon;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
-@AllArgsConstructor
-@EqualsAndHashCode @ToString
-public class FractionalHexagon {
+public record FractionalHexagon(HexagonalGrid grid, double q, double r) {
     
-    private HexagonalGrid grid;
-    private double q;
-    private double r;
-    
-    public HexagonalGrid grid() {return this.grid;}
-    public double q() {return this.q;}
-    public double r() {return this.r;}
-    public double s() {return -(this.q + this.r);}
+    public double s() {
+        return -(this.q + this.r);
+    }
     
     public Hexagon asStrict() {
         long q = Math.round(this.q);

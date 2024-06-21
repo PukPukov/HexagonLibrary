@@ -1,6 +1,5 @@
 package ru.ancap.hexagon;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import ru.ancap.algorithm.compact.Morton64Compactor;
@@ -9,21 +8,14 @@ import ru.ancap.hexagon.common.Point;
 import ru.ancap.hexagon.common.PointsListToPolygon;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
-@AllArgsConstructor
-@EqualsAndHashCode @ToString
-public class Hexagon {
+public record Hexagon(HexagonalGrid grid, long q, long r) {
     
-    private final HexagonalGrid grid;
-    private final long q;
-    private final long r;
-    
-    public long q() {return q;}
-    public long r() {return r;}
-    public long s() {return -(q + r);}
-    public HexagonalGrid grid() {return this.grid;}
+    public long s() {
+        return -(this.q + this.r);
+    }
     
     public Polygon toPolygon() {
         return PointsListToPolygon.INSTANCE.apply(this.vertexes().stream().map(HexagonVertex::position).toList());
@@ -68,12 +60,12 @@ public class Hexagon {
     }
     
     public Hexagon neighbor(int index) {
-        Pair<Integer, Integer> modifier = this.modifierMap.get(index);
+        Pair<Integer, Integer> modifier = modifierMap.get(index);
         return new Hexagon(this.grid, this.q + modifier.key(), this.r + modifier.value());
     }
     
     @ToString.Exclude @EqualsAndHashCode.Exclude
-    private final Map<Integer, Pair<Integer, Integer>> modifierMap = Map.of(
+    private static final Map<Integer, Pair<Integer, Integer>> modifierMap = Map.of(
         0, new Pair<>( 1,  0),
         1, new Pair<>( 0,  1),
         2, new Pair<>(-1,  1),
