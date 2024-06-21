@@ -11,7 +11,7 @@
     
     <modules>
         <module>Core</module>
-        <module>JavaFXTest</module>
+        <module>FX</module>
     </modules>
 
     <properties>
