@@ -1,5 +1,5 @@
 # HexagonLibrary
-![](https://img.shields.io/tokei/lines/github/pukpukov/HexagonLibrary-Java?style=for-the-badge&logo=appveyor)
+![](https://img.shields.io/tokei/lines/github/PukPukov/HexagonLibrary-Java?style=for-the-badge&logo=appveyor)
 
 ## Описание
 Универсальная библиотека на Java для создания гексагональных сеток и работы с ними. 
@@ -50,7 +50,7 @@
 
 ## Maven
 
-[![](https://jitpack.io/v/ancap-kun/HexagonLibrary.svg)](https://jitpack.io/#ancap-kun/HexagonLibrary)
+[![](https://jitpack.io/v/PukPukov/HexagonLibrary.svg)](https://jitpack.io/#PukPukov/HexagonLibrary)
 
 ```xml
 <repository>
@@ -61,7 +61,7 @@
 
 ```xml
 <dependency>
-    <groupId>com.github.ancap-kun</groupId>
+    <groupId>com.github.PukPukov</groupId>
     <artifactId>HexagonLibrary</artifactId>
     <version>Tag</version>
 </dependency>
