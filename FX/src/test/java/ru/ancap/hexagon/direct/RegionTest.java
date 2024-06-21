@@ -18,9 +18,9 @@ import java.util.List;
  */
 @HandTest
 public class RegionTest extends Application {
-
+    
     private final HexagonalGrid grid = new HexagonalGrid(GridOrientation.FLAT, new Point(100, 100), new Point(0, 0));
-
+    
     @Override
     public void start(Stage primaryStage) {
         Figure figure = new Figure(List.of(
@@ -31,12 +31,12 @@ public class RegionTest extends Application {
         ));
         
         HexagonRegion region = this.grid.regionByIntersection(figure);
-
+        
         new FXRegionDrawer(primaryStage, region).run();
     }
-
+    
     public static void main(String[] args) {
         launch(args);
     }
-
+    
 }

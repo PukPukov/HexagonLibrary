@@ -16,7 +16,7 @@ public class HexagonMethodApplier implements NodeMethodApplier<Hexagon> {
     public Set<Hexagon> neighbors(Hexagon hexagon) {
         return hexagon.neighbors(1);
     }
-
+    
     @Override
     public boolean equals(Hexagon hexagon, Hexagon compared) {
         return hexagon.equals(compared);

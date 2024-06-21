@@ -15,11 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode @ToString
 public class Hexagon {
-
+    
     private final HexagonalGrid grid;
     private final long q;
     private final long r;
-
+    
     public long q() {return q;}
     public long r() {return r;}
     public long s() {return -(q + r);}
@@ -33,7 +33,7 @@ public class Hexagon {
         Morton64Compactor mort = this.grid.morton();
         return mort.pack(this.q, this.r);
     }
-
+    
     public Point center() {
         GridOrientation gridOrientation = this.grid.orientation();
         Point size = this.grid.size();
@@ -42,31 +42,31 @@ public class Hexagon {
         double y = (gridOrientation.f()[2] * this.q + gridOrientation.f()[3] * this.r) * size.y() + origin.y();
         return new Point(x, y);
     }
-
+    
     public HexagonSide side(int index) {
         return new HexagonSide(this, index);
     }
-
+    
     public Set<HexagonSide> sides() {
         Set<HexagonSide> hexagonSides = new HashSet<>();
-        for (int i = 0; i<6; i++) {
+        for (int i = 0; i < 6; i++) {
             hexagonSides.add(this.side(i));
         }
         return hexagonSides;
     }
-
+    
     public HexagonVertex vertex(int index) {
         return new HexagonVertex(this, index);
     }
-
+    
     public List<HexagonVertex> vertexes() {
         List<HexagonVertex> hexagonVertexes = new ArrayList<>();
-        for (int i = 0; i<6; i++) {
+        for (int i = 0; i < 6; i++) {
             hexagonVertexes.add(this.vertex(i));
         }
         return hexagonVertexes;
     }
-
+    
     public Hexagon neighbor(int index) {
         Pair<Integer, Integer> modifier = this.modifierMap.get(index);
         return new Hexagon(this.grid, this.q + modifier.key(), this.r + modifier.value());
@@ -96,7 +96,7 @@ public class Hexagon {
         }
         return neighbors;
     }
-
+    
     public boolean neighborOf(Hexagon hexagon) {
         return this.neighbors(1).contains(hexagon);
     }

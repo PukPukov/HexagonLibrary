@@ -18,28 +18,28 @@ import java.util.Set;
 
 @AllArgsConstructor
 public class FXRegionDrawer {
-
+    
     private static final int WIDTH = 1500;
     private static final int HEIGHT = 1000;
-
+    
     private final Stage primaryStage;
     private final HexagonRegion region;
-
+    
     /**
      * @return GraphicsContext for additional drawing
      */
     public GraphicsContext run() {
         Group root = new Group();
-
+        
         Canvas canvas = new Canvas(1500, 1500);
-
+        
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
-
+        
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
-
+        
         graphicsContext.setFill(Color.PAPAYAWHIP);
         for (Hexagon hex : this.region.hexagons()) {
             List<HexagonVertex> vertexes = hex.vertexes();
@@ -54,11 +54,11 @@ public class FXRegionDrawer {
             }
             graphicsContext.fillPolygon(xPoints, yPoints, xPoints.length);
         }
-
+        
         Set<HexagonSide> sides = this.region.bounds();
         graphicsContext.setLineWidth(5);
         graphicsContext.setStroke(Color.BLACK);
-
+        
         for (HexagonSide side : sides) {
             var pair = side.ends();
             graphicsContext.strokeLine(

@@ -17,7 +17,7 @@ public class HexagonRegion {
     
     private final HexagonalGrid grid;
     private final Set<Hexagon> hexagons;
-
+    
     public HexagonalGrid grid() {return this.grid;}
     public Set<Hexagon> hexagons() {return this.hexagons;}
     
@@ -28,7 +28,7 @@ public class HexagonRegion {
         Set<HexagonSide> duplicateChecker = new HashSet<>();
         Set<HexagonSide> duplicateSides = new HashSet<>();
         
-        for(HexagonSide side : sides) {
+        for (HexagonSide side : sides) {
             if (duplicateChecker.contains(side)) duplicateSides.add(side);
             duplicateChecker.add(side);
         }
@@ -38,7 +38,7 @@ public class HexagonRegion {
         
         return returnSides;
     }
-
+    
     public boolean contains(Hexagon hexagon) {
         return this.hexagons.contains(hexagon);
     }
