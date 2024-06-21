@@ -11,7 +11,6 @@ import ru.ancap.hexagon.drawer.FXRegionDrawer;
 
 import java.util.List;
 
-
 public class RegionTest extends Application {
 
     private final HexagonalGrid grid = new HexagonalGrid(GridOrientation.FLAT, new Point(100, 100), new Point(0, 0));
