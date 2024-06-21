@@ -37,6 +37,11 @@ public class HashTest {
             set.add(supplier.apply(i));
             list.add(supplier.apply(i));
         }
+        // this should do nothing; the idea is to ensure that hash calculates properly by using 
+        // HashSet do-nothing on adding already existing item feature
+        for (int i = 0; i < count; i++) {
+            set.add(supplier.apply(i));
+        }
         for (int i = 0; i < count; i++) assertTrue(set.containsAll(list));
         assertEquals(set.size(), list.size(), "Set = \""+set+"\", list = \""+list+"\"");
         assertEquals(set.size(), count,       "Set = \""+set+"\", list = \""+list+"\", count = \""+count+"\", set.size() = \""+set.size()+"\", list.size() = \""+list.size()+"\"");
