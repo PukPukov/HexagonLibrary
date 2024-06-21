@@ -62,8 +62,8 @@ public class FXRegionDrawer {
         for (HexagonSide side : sides) {
             var pair = side.ends();
             graphicsContext.strokeLine(
-                pair.getKey().position().x(),   pair.getKey().position().y(),
-                pair.getValue().position().x(), pair.getValue().position().y()
+                pair.key().position().x(),   pair.key().position().y(),
+                pair.value().position().x(), pair.value().position().y()
             );
         }
         return graphicsContext;

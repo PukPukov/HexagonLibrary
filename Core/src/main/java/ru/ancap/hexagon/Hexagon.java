@@ -69,7 +69,7 @@ public class Hexagon {
 
     public Hexagon neighbor(int index) {
         Pair<Integer, Integer> modifier = this.modifierMap.get(index);
-        return new Hexagon(this.grid, this.q + modifier.getKey(), this.r + modifier.getValue());
+        return new Hexagon(this.grid, this.q + modifier.key(), this.r + modifier.value());
     }
     
     @ToString.Exclude @EqualsAndHashCode.Exclude
