@@ -42,7 +42,7 @@ public class HashTest {
         for (int i = 0; i < count; i++) {
             set.add(supplier.apply(i));
         }
-        for (int i = 0; i < count; i++) assertTrue(set.containsAll(list));
+        assertTrue(set.containsAll(list));
         assertEquals(set.size(), list.size(), "Set = \""+set+"\", list = \""+list+"\"");
         assertEquals(set.size(), count,       "Set = \""+set+"\", list = \""+list+"\", count = \""+count+"\", set.size() = \""+set.size()+"\", list.size() = \""+list.size()+"\"");
     }
