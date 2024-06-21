@@ -1,6 +1,7 @@
 package ru.ancap.hexagon.direct;
 
 import org.junit.jupiter.api.Test;
+import ru.ancap.commons.iterable.StreamIterator;
 import ru.ancap.hexagon.*;
 import ru.ancap.hexagon.common.Figure;
 import ru.ancap.hexagon.common.Point;
@@ -8,6 +9,7 @@ import ru.ancap.hexagon.common.Point;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -42,10 +44,25 @@ public class HashTest {
         for (int i = 0; i < count; i++) {
             set.add(supplier.apply(i));
         }
-        assertTrue(set.containsAll(list));
-        assertTrue(list.containsAll(set));
+        testSameContents("set", set, "list", list);
         assertEquals(set.size(), list.size(), "Set = \""+set+"\", list = \""+list+"\"");
         assertEquals(set.size(), count,       "Set = \""+set+"\", list = \""+list+"\", count = \""+count+"\", set.size() = \""+set.size()+"\", list.size() = \""+list.size()+"\"");
+    }
+    
+    private <T> void testSameContents(String firstName, Iterable<T> first, String secondName, Iterable<T> second) {
+        testAllFromFirstInSecond(firstName, first, secondName, second);
+        testAllFromFirstInSecond(secondName, second, firstName, first);
+    }
+    
+    private <T> void testAllFromFirstInSecond(String firstName, Iterable<T> first, String secondName, Iterable<T> second) {
+        Set<T> secondSet = StreamIterator.wrap(second.iterator()).collect(Collectors.toSet());
+        for (T inFirst : first) if (!secondSet.contains(inFirst)) throw new IllegalStateException(
+            "\n"+
+            "\""+inFirst+"\"\n" +
+            "present in "+firstName+"\n" +
+            "and should be present in "+secondName+",\n" +
+            "but does not."
+        );
     }
     
 }
