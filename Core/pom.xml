@@ -7,6 +7,11 @@
     <groupId>ru.ancap</groupId>
     <artifactId>HexagonLibrary</artifactId>
     <version>1.2-beta.6</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>Core</module>
+        <module>JavaFXTest</module>
+    </modules>
 
     <properties>
         <java.version>21</java.version>
