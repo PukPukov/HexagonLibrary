@@ -1,25 +1,12 @@
 package ru.ancap.hexagon;
 
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor(access = AccessLevel.MODULE)
-@EqualsAndHashCode @ToString
-public class HexagonRegion {
-    
-    private final HexagonalGrid grid;
-    private final Set<Hexagon> hexagons;
-    
-    public HexagonalGrid grid() {return this.grid;}
-    public Set<Hexagon> hexagons() {return this.hexagons;}
+public record HexagonRegion(HexagonalGrid grid, Set<Hexagon> hexagons) {
     
     public Set<HexagonSide> bounds() {
         List<HexagonSide> sides = new ArrayList<>();

@@ -1,8 +1,5 @@
 package ru.ancap.hexagon;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.jetbrains.annotations.NotNull;
 import ru.ancap.algorithm.compact.Morton64Compactor;
 import ru.ancap.algorithm.walkthrough.Walkthrough;
@@ -17,25 +14,18 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
-@EqualsAndHashCode @ToString
-public class HexagonalGrid {
+public record HexagonalGrid(GridOrientation orientation, Point size, Point origin, Morton64Compactor morton) {
     
     public static final HexagonalGrid CLASSIC = new HexagonalGrid(GridOrientation.FLAT, new Point(100, 100), new Point(0, 0));
     
-    private final GridOrientation gridOrientation;
-    private final Point size;
-    private final Point origin;
-    @ToString.Exclude private final Morton64Compactor morton = new Morton64Compactor();
-    
     public HexagonalGrid(HexagonalGrid hexagonalGrid) {
-        this(hexagonalGrid.gridOrientation, hexagonalGrid.size, hexagonalGrid.origin);
+        this(hexagonalGrid.orientation, hexagonalGrid.size, hexagonalGrid.origin);
     }
     
-    public GridOrientation orientation() {return this.gridOrientation;}
-    public Point origin() {return this.origin;}
-    public Point size() {return this.size;}
-    public Morton64Compactor morton() {return this.morton;}
+    public HexagonalGrid(GridOrientation orientation, Point size, Point origin) {
+        this(orientation, size, origin, new Morton64Compactor());
+    }
+    
     
     public Hexagon hexagon(long code) {
         int[] qr = this.morton.unpack(code);
@@ -45,8 +35,8 @@ public class HexagonalGrid {
     public Hexagon hexagon(Point point) {
         double x = (point.x() - this.origin.x()) / this.size.x();
         double y = (point.y() - this.origin.y()) / this.size.y();
-        double q = this.gridOrientation.b()[0] * x + this.gridOrientation.b()[1] * y;
-        double r = this.gridOrientation.b()[2] * x + this.gridOrientation.b()[3] * y;
+        double q = this.orientation.b()[0] * x + this.orientation.b()[1] * y;
+        double r = this.orientation.b()[2] * x + this.orientation.b()[3] * y;
         return this.fractionalHexagon(q, r).asStrict();
     }
     

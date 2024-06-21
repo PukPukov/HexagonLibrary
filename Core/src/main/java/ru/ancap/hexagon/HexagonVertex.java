@@ -1,23 +1,11 @@
 package ru.ancap.hexagon;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import ru.ancap.algorithm.axis.CyclicNumberAxis;
 import ru.ancap.hexagon.common.Point;
 
 import java.util.Set;
 
-@AllArgsConstructor
-@EqualsAndHashCode @ToString
-public class HexagonVertex {
-    
-    private final Hexagon baseHexagon;
-    private final int vertexIndex;
-    
-    public int vertexIndex() {
-        return this.vertexIndex;
-    }
+public record HexagonVertex(Hexagon baseHexagon, int vertexIndex) {
     
     public Set<Hexagon> connected() {
         return Set.of(
