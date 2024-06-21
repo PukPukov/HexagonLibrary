@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.jetbrains.annotations.NotNull;
-import ru.ancap.algorighm.compact.Morton64Compactor;
+import ru.ancap.algorithm.compact.Morton64Compactor;
 import ru.ancap.algorithm.walkthrough.Walkthrough;
 import ru.ancap.hexagon.common.Figure;
 import ru.ancap.hexagon.common.Point;

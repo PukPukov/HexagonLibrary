@@ -25,17 +25,17 @@ public class HexagonSide {
 
     public Pair<HexagonVertex, HexagonVertex> ends() {
         return new Pair<>(
-            this.baseHexagon.vertex(CyclicNumberAxis.HEXAGONAL.offset(this.direction, 0)),
-            this.baseHexagon.vertex(CyclicNumberAxis.HEXAGONAL.offset(this.direction, 1))
+            this.baseHexagon.vertex((int) CyclicNumberAxis.HEXAGONAL.offset(this.direction, 0)),
+            this.baseHexagon.vertex((int) CyclicNumberAxis.HEXAGONAL.offset(this.direction, 1))
         );
     }
 
     public HexagonSide equal() {
-        return new HexagonSide(this.baseHexagon.neighbor(this.direction()), CyclicNumberAxis.HEXAGONAL.offset(this.direction, 3));
+        return new HexagonSide(this.baseHexagon.neighbor(this.direction()), (int) CyclicNumberAxis.HEXAGONAL.offset(this.direction, 3));
     }
 
     public HexagonSide absolute() {
-        if (this.direction > 2) return new HexagonSide(this.baseHexagon.neighbor(this.direction), CyclicNumberAxis.HEXAGONAL.offset(this.direction, -3));
+        if (this.direction > 2) return new HexagonSide(this.baseHexagon.neighbor(this.direction), (int) CyclicNumberAxis.HEXAGONAL.offset(this.direction, -3));
         else return this;
     }
 

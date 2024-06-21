@@ -17,7 +17,7 @@
     <properties>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <algorithm.framework.version>1.4.2</algorithm.framework.version>
+        <algorithm.framework.version>1.4.3</algorithm.framework.version>
         <core.version>1.2-beta.7</core.version>
     </properties>
 
