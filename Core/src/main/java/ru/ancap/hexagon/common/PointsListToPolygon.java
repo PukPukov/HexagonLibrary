@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.function.Function;
 
 public class PointsListToPolygon implements Function<List<Point>, Polygon> {
-
+    
     public static PointsListToPolygon INSTANCE = new PointsListToPolygon();
-
+    
     /* Shouldn't instantiate, should be used by provided instance */
     private PointsListToPolygon() {}
-
+    
     @Override
     public Polygon apply(List<Point> points) {
         int pointsAmount = points.size();

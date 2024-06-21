@@ -9,19 +9,19 @@ import lombok.ToString;
 public class GridOrientation {
     
     public final static GridOrientation POINTY = new GridOrientation(
-            "pointy",
-            new double[]{Math.sqrt(3.0), Math.sqrt(3.0) / 2.0, 0.0, 3.0 / 2.0},
-            new double[]{Math.sqrt(3.0) / 3.0, -1.0 / 3.0, 0.0, 2.0 / 3.0},
-            0.5
+        "pointy",
+        new double[] {Math.sqrt(3.0), Math.sqrt(3.0) / 2.0, 0.0, 3.0 / 2.0},
+        new double[] {Math.sqrt(3.0) / 3.0, -1.0 / 3.0, 0.0, 2.0 / 3.0},
+        0.5
     );
-
+    
     public final static GridOrientation FLAT = new GridOrientation(
-            "flat",
-            new double[]{3.0 / 2.0, 0.0, Math.sqrt(3.0) / 2.0, Math.sqrt(3.0)},
-            new double[]{2.0 / 3.0, 0.0, -1.0 / 3.0, Math.sqrt(3.0) / 3.0},
-            0.0
+        "flat",
+        new double[] {3.0 / 2.0, 0.0, Math.sqrt(3.0) / 2.0, Math.sqrt(3.0)},
+        new double[] {2.0 / 3.0, 0.0, -1.0 / 3.0, Math.sqrt(3.0) / 3.0},
+        0.0
     );
-
+    
     private final String name;
     
     @ToString.Exclude private final double[] f;
@@ -29,7 +29,7 @@ public class GridOrientation {
     @ToString.Exclude private final double startAngle;
     @ToString.Exclude private final double[] sinuses;
     @ToString.Exclude private final double[] cosinuses;
-
+    
     public GridOrientation(String name, double[] f, double[] b, double startAngle) {
         this.name = name;
         this.f = f;

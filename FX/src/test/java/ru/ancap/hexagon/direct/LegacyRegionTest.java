@@ -21,15 +21,15 @@ import java.util.List;
  */
 @HandTest
 public class LegacyRegionTest extends Application {
-
+    
     private final HexagonalGrid grid = new HexagonalGrid(GridOrientation.FLAT, new Point(100, 100), new Point(0, 0));
-
+    
     @Override
     public void start(Stage primaryStage) {
-
+        
         Polygon polygon = new Polygon(
-            new int[]{500, 500, 700, 700},
-            new int[]{500, 700, 700, 500},
+            new int[] {500, 500, 700, 700},
+            new int[] {500, 700, 700, 500},
             4
         );
         
@@ -43,7 +43,7 @@ public class LegacyRegionTest extends Application {
         GraphicsContext graphicsContext = new FXRegionDrawer(primaryStage, region).run();
         new PolygonDrawer(graphicsContext, polygon).run();
     }
-
+    
     public static void main(String[] args) {
         launch(args);
     }
