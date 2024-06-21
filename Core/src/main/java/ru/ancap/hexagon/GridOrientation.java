@@ -1,6 +1,12 @@
 package ru.ancap.hexagon;
 
-public record GridOrientation(String name, double[] f, double[] b, double startAngle, double[] sinuses, double[] cosinuses) {
+import lombok.*;
+import lombok.experimental.Accessors;
+
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode @ToString
+@Accessors(fluent = true) @Getter
+public final class GridOrientation {
     
     public final static GridOrientation POINTY = new GridOrientation(
         "pointy",
@@ -16,27 +22,29 @@ public record GridOrientation(String name, double[] f, double[] b, double startA
         0.0
     );
     
-    public GridOrientation(String name, double[] f, double[] b, double startAngle) {
-        this(__(name, f, b, startAngle));
-    }
+    private final String name;
+    private final double[] f;
+    private final double[] b;
+    private final double startAngle;
     
-    /**
-     * Non-flexible constructor bodies in java 21 issue workaround
-     */
-    private static GridOrientation __(String name, double[] f, double[] b, double startAngle) {
-        double[] sinuses = new double[6];
-        double[] cosinuses = new double[6];
+    // cache
+    @EqualsAndHashCode.Exclude @ToString.Exclude private final double[] sinuses;
+    @EqualsAndHashCode.Exclude @ToString.Exclude private final double[] cosinuses;
+    
+    public GridOrientation(String name, double[] f, double[] b, double startAngle) {
+        this.name = name;
+        this.f = f;
+        this.b = b;
+        this.startAngle = startAngle;
+        this.sinuses = new double[6];
+        this.cosinuses = new double[6];
         for (int i = 0; i < 6; i++) {
             double angle = 2.0 * Math.PI * (i + startAngle) / 6.0;
-            sinuses[i] = Math.sin(angle);
-            cosinuses[i] = Math.cos(angle);
+            this.sinuses[i] = Math.sin(angle);
+            this.cosinuses[i] = Math.cos(angle);
         }
-        return new GridOrientation(name, f, b, startAngle, sinuses, cosinuses);
     }
-    
-    /**
-     * Copy-constructor, mainly used in construction help
-     */
+
     public GridOrientation(GridOrientation gridOrientation) {
         this(gridOrientation.name, gridOrientation.f, gridOrientation.b, gridOrientation.startAngle, gridOrientation.sinuses, gridOrientation.cosinuses);
     }
