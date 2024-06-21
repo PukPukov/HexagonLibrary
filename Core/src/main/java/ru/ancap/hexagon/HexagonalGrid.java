@@ -134,9 +134,9 @@ public class HexagonalGrid {
         
         if (start.x() > end.x()) {
             if (point.x() > start.x()) return false;
-            if (point.x() < end.x()) return true;
+            if (point.x() < end.x())   return true;
         } else {
-            if (point.x() > end.x()) return false;
+            if (point.x() > end.x())   return false;
             if (point.x() < start.x()) return true;
         }
         
