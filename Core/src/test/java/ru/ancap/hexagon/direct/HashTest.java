@@ -43,6 +43,7 @@ public class HashTest {
             set.add(supplier.apply(i));
         }
         assertTrue(set.containsAll(list));
+        assertTrue(list.containsAll(set));
         assertEquals(set.size(), list.size(), "Set = \""+set+"\", list = \""+list+"\"");
         assertEquals(set.size(), count,       "Set = \""+set+"\", list = \""+list+"\", count = \""+count+"\", set.size() = \""+set.size()+"\", list.size() = \""+list.size()+"\"");
     }
