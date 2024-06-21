@@ -23,7 +23,7 @@ public class HexagonVertex {
         return Set.of(
             this.baseHexagon,
             this.baseHexagon.neighbor(this.vertexIndex),
-            this.baseHexagon.neighbor(CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 1))
+            this.baseHexagon.neighbor((int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 1))
         );
     }
 
@@ -40,8 +40,8 @@ public class HexagonVertex {
 
     private Set<HexagonVertex> equivalents() {
         return Set.of(
-            new HexagonVertex(this.baseHexagon.neighbor(this.vertexIndex),                                       CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 2)),
-            new HexagonVertex(this.baseHexagon.neighbor(CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 1)), CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 4))
+            new HexagonVertex(this.baseHexagon.neighbor(this.vertexIndex),                                             (int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 2)),
+            new HexagonVertex(this.baseHexagon.neighbor((int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 1)), (int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 4))
         );
     }
 

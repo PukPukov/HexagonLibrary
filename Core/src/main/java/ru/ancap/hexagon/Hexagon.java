@@ -3,7 +3,7 @@ package ru.ancap.hexagon;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import ru.ancap.algorighm.compact.Morton64Compactor;
+import ru.ancap.algorithm.compact.Morton64Compactor;
 import ru.ancap.commons.Pair;
 import ru.ancap.hexagon.common.Point;
 import ru.ancap.hexagon.common.PointsListToPolygon;
