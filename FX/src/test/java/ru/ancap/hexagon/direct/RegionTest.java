@@ -2,6 +2,7 @@ package ru.ancap.hexagon.direct;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import launchers.RegionTestLauncher;
 import ru.ancap.hexagon.GridOrientation;
 import ru.ancap.hexagon.HexagonRegion;
 import ru.ancap.hexagon.HexagonalGrid;
@@ -11,6 +12,9 @@ import ru.ancap.hexagon.drawer.FXRegionDrawer;
 
 import java.util.List;
 
+/**
+ * Use launcher to launch (workaround of strange javafx bug), link: {@link RegionTestLauncher}
+ */
 public class RegionTest extends Application {
 
     private final HexagonalGrid grid = new HexagonalGrid(GridOrientation.FLAT, new Point(100, 100), new Point(0, 0));
