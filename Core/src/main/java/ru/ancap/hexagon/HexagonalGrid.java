@@ -70,9 +70,9 @@ public class HexagonalGrid {
         List<Point> figureVertexes = figure.vertexes();
         List<Hexagon> hexagons = new ArrayList<>();
         int len = figureVertexes.size();
-        if (figureVertexes.get(0).equals(figureVertexes.get(len - 1))) len -= 1;
+        if (figureVertexes.getFirst().equals(figureVertexes.get(len - 1))) len -= 1;
 
-        Hexagon hexagon = this.hexagon(figureVertexes.get(0));
+        Hexagon hexagon = this.hexagon(figureVertexes.getFirst());
         long q1 = hexagon.q();
         long q2 = hexagon.q();
         long r1 = hexagon.r();
@@ -117,7 +117,7 @@ public class HexagonalGrid {
     }
 
     private static boolean pointInGeometry(@NotNull List<Point> geometry, int len, Point point) {
-        boolean contains = intersectsWithRaycast(point, geometry.get(len - 1), geometry.get(0));
+        boolean contains = intersectsWithRaycast(point, geometry.get(len - 1), geometry.getFirst());
         for (int i = 1; i < len; i++) {
             if (intersectsWithRaycast(point, geometry.get(i - 1), geometry.get(i))) {
                 contains = !contains;
