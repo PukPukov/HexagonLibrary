@@ -93,4 +93,9 @@ public record Hexagon(HexagonalGrid grid, long q, long r) {
         return this.neighbors(1).contains(hexagon);
     }
     
+    @Override
+    public String toString() {
+        return this.q+";"+this.r;
+    }
+    
 }

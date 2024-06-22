@@ -15,6 +15,11 @@ public record HexagonVertex(Hexagon baseHexagon, int vertexIndex) {
         );
     }
     
+    /**
+     * Actually, when hexagons are on grid, they share same vertexes with neighbors. But technically
+     * one vertex is attached to only one hexagon, so there is equivalents, and if you need absolute representation
+     * of vertexes, you can get rid of equivalents inducing absolute representation.
+     */
     public HexagonVertex absolute() {
         Set<HexagonVertex> equals = this.equivalents();
         for (HexagonVertex equal : equals) {
@@ -26,6 +31,11 @@ public record HexagonVertex(Hexagon baseHexagon, int vertexIndex) {
         return this;
     }
     
+    /**
+     * Actually, when hexagons are on grid, they share same vertexes with neighbors. But technically
+     * one vertex is attached to only one hexagon, so there is equivalents, and equivalent can be obtained
+     * with that method.
+     */
     private Set<HexagonVertex> equivalents() {
         return Set.of(
             new HexagonVertex(this.baseHexagon.neighbor(this.vertexIndex), (int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 2)),
