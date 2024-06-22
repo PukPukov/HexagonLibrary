@@ -29,18 +29,7 @@ public class FXRegionDrawer {
      * @return GraphicsContext for additional drawing
      */
     public GraphicsContext run() {
-        Group root = new Group();
-        
-        Canvas canvas = new Canvas(1500, 1500);
-        
-        GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-        root.getChildren().add(canvas);
-        
-        Scene scene = new Scene(root, WIDTH, HEIGHT);
-        this.primaryStage.setScene(scene);
-        this.primaryStage.show();
-        
-        graphicsContext.setFill(Color.PAPAYAWHIP);
+        GraphicsContext graphicsContext = FXHexagonLibraryDrawUtils.prepare(WIDTH, HEIGHT, this.primaryStage);
         for (Hexagon hex : this.region.hexagons()) {
             List<HexagonVertex> vertexes = hex.vertexes();
             double[] xPoints = new double[vertexes.size()];
