@@ -3,6 +3,8 @@ package ru.ancap.hexagon;
 import ru.ancap.algorithm.axis.CyclicNumberAxis;
 import ru.ancap.commons.Pair;
 
+import java.util.List;
+
 /**
  * @param base Hexagon that technically contains this side
  */
@@ -11,12 +13,12 @@ public record HexagonSide(Hexagon base, int direction) {
     /**
      * @return Hexagons, that actually contains this side. Key is base hexagon, value is connected. 
      */
-    public Pair<Hexagon, Hexagon> connected() {
-        return new Pair<>(this.base, this.base.neighbor(this.direction()));
+    public List<Hexagon> connected() {
+        return List.of(this.base, this.base.neighbor(this.direction()));
     }
     
-    public Pair<HexagonVertex, HexagonVertex> ends() {
-        return new Pair<>(this.start(), this.end());
+    public List<HexagonVertex> ends() {
+        return List.of(this.start(), this.end());
     }
     
     public HexagonVertex start() {

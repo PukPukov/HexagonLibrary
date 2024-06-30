@@ -18,7 +18,7 @@
         <java.version>21</java.version>
         <encoding>UTF-8</encoding>
         <algorithm.framework.version>1.4.3</algorithm.framework.version>
-        <core.version>1.2-beta.7</core.version>
+        <core.version>1.2-beta.8</core.version>
     </properties>
 
     <repositories>
@@ -81,6 +81,14 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.5.0</version>
 
+                <configuration>
+                    <relocations>
+                        <relocation>
+                            <pattern>ru.ancap.commons</pattern>
+                            <shadedPattern>ru.ancap.hexagon.internal.commons</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
