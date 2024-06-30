@@ -1,3 +1,2 @@
-before_install:
-  - sdk install java 19.0.2.fx-librca
-  - sdk use java 19.0.2.fx-librca
+jdk:
+  - openjdk22
