@@ -49,10 +49,11 @@ public class FXRegionDrawer {
         graphicsContext.setStroke(Color.BLACK);
         
         for (HexagonSide side : sides) {
-            var pair = side.ends();
+            var start = side.start();
+            var end = side.end();
             graphicsContext.strokeLine(
-                pair.key().position().x(),   pair.key().position().y(),
-                pair.value().position().x(), pair.value().position().y()
+                start.position().x(), start.position().y(),
+                end.position().x(),   end.position().y()
             );
         }
         return graphicsContext;
