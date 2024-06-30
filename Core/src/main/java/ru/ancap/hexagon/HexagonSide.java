@@ -17,6 +17,10 @@ public record HexagonSide(Hexagon base, int direction) {
         return List.of(this.base, this.base.neighbor(this.direction()));
     }
     
+    /**
+     * @deprecated Useless method
+     */
+    @Deprecated
     public List<HexagonVertex> ends() {
         return List.of(this.start(), this.end());
     }
