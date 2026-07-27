@@ -1,6 +1,4 @@
 # HexagonLibrary
-![](https://img.shields.io/tokei/lines/github/PukPukov/HexagonLibrary-Java?style=for-the-badge&logo=appveyor)
-
 ## Описание
 Универсальная библиотека на Java для создания гексагональных сеток и работы с ними. 
 ## Преимущества
