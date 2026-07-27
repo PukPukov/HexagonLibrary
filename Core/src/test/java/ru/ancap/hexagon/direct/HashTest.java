@@ -24,7 +24,7 @@ public class HashTest {
         this.test(integer -> new HexagonalGrid(GridOrientation.FLAT, new Point(integer, integer), new Point(integer, integer)));
         this.test(integer -> new Hexagon(HexagonalGrid.CLASSIC, integer, integer));
         this.test(integer -> new Point(integer, integer));
-        this.test(integer -> new GridOrientation(""+integer, new double[] {(double) integer}, new double[] {(double) integer}, (double) integer));
+        this.test(integer -> new GridOrientation(""+integer, new double[] {(double) integer}, new double[] {(double) integer}, (double) integer, List.of()));
         this.test(integer -> new FractionalHexagon(HexagonalGrid.CLASSIC, (double) integer, (double) integer));
         this.test(integer -> HexagonalGrid.CLASSIC.region(Set.of(new Hexagon(HexagonalGrid.CLASSIC, integer, integer))));
         this.test(integer -> new HexagonSide(new Hexagon(HexagonalGrid.CLASSIC, integer, integer), integer));
