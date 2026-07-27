@@ -11,7 +11,7 @@ public record HexagonVertex(Hexagon baseHexagon, int vertexIndex) {
         return Set.of(
             this.baseHexagon,
             this.baseHexagon.neighbor(this.vertexIndex),
-            this.baseHexagon.neighbor((int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 1))
+            this.baseHexagon.neighbor((int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, -1))
         );
     }
     
@@ -38,8 +38,8 @@ public record HexagonVertex(Hexagon baseHexagon, int vertexIndex) {
      */
     private Set<HexagonVertex> equivalents() {
         return Set.of(
-            new HexagonVertex(this.baseHexagon.neighbor(this.vertexIndex), (int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 2)),
-            new HexagonVertex(this.baseHexagon.neighbor((int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 1)), (int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 4))
+            new HexagonVertex(this.baseHexagon.neighbor((int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, -1)), (int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 2)),
+            new HexagonVertex(this.baseHexagon.neighbor(this.vertexIndex), (int) CyclicNumberAxis.HEXAGONAL.offset(this.vertexIndex, 4))
         );
     }
     

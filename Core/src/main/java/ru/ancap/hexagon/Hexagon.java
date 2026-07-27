@@ -60,19 +60,9 @@ public record Hexagon(HexagonalGrid grid, long q, long r) {
     }
     
     public Hexagon neighbor(int index) {
-        Pair<Integer, Integer> modifier = modifierMap.get(index);
+        Pair<Integer, Integer> modifier = this.grid.orientation().modifiers().get(index);
         return new Hexagon(this.grid, this.q + modifier.a(), this.r + modifier.b());
     }
-    
-    @ToString.Exclude @EqualsAndHashCode.Exclude
-    private static final Map<Integer, Pair<Integer, Integer>> modifierMap = Map.of(
-        0, new Pair<>( 1,  0),
-        1, new Pair<>( 0,  1),
-        2, new Pair<>(-1,  1),
-        3, new Pair<>(-1,  0),
-        4, new Pair<>( 0, -1),
-        5, new Pair<>( 1, -1)
-    );
     
     public Set<Hexagon> neighbors(int layers) {
         Set<Hexagon> neighbors = new HashSet<>();
