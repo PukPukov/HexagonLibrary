@@ -19,7 +19,7 @@
         <lombok.version>1.18.46</lombok.version>
         <encoding>UTF-8</encoding>
         <algorithm.framework.version>1.4.3</algorithm.framework.version>
-        <core.version>1.2-beta.10</core.version>
+        <core.version>1.2-beta.11</core.version>
         <master-version>${core.version}</master-version>
     </properties>
 

@@ -22,7 +22,7 @@ import java.util.List;
 @HandTest
 public class LegacyRegionTest extends Application {
     
-    private final HexagonalGrid grid = new HexagonalGrid(GridOrientation.FLAT, new Point(100, 100), new Point(0, 0));
+    private final HexagonalGrid grid = new HexagonalGrid(GridOrientation.POINTY, new Point(100, 100), new Point(0, 0));
     
     @Override
     public void start(Stage primaryStage) {
