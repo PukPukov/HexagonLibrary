@@ -3,7 +3,7 @@ package ru.ancap.hexagon;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 @EqualsAndHashCode @ToString
 @Accessors(fluent = true) @Getter
 public final class GridOrientation {
