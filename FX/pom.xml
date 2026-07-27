@@ -5,13 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>FX</artifactId>
-    <version>1.0.1</version>
-    <packaging>jar</packaging>
+    <packaging>${jarLifecycleType}</packaging>
     
     <parent>
-        <groupId>ru.ancap</groupId>
+        <groupId>ru.pukpukov</groupId>
         <artifactId>HexagonLibrary</artifactId>
-        <version>1.0</version>
+        <version>${revision}</version>
     </parent>
     
     <properties>
@@ -20,9 +19,9 @@
     
     <dependencies>
         <dependency>
-            <groupId>ru.ancap</groupId>
+            <groupId>ru.pukpukov</groupId>
             <artifactId>Core</artifactId>
-            <version>${core.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>

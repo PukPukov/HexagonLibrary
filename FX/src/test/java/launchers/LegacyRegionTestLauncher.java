@@ -1,6 +1,6 @@
 package launchers;
 
-import ru.ancap.hexagon.direct.LegacyRegionTest;
+import ru.pukpukov.hexagon.direct.LegacyRegionTest;
 
 /**
  * JavaFX for some reason requires this shit to run properly on non-javafx jdks

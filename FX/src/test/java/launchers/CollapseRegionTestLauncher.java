@@ -1,7 +1,6 @@
 package launchers;
 
-import ru.ancap.hexagon.direct.CollapseRegionTest;
-import ru.ancap.hexagon.direct.RegionTest;
+import ru.pukpukov.hexagon.direct.CollapseRegionTest;
 
 /**
  * JavaFX for some reason requires this shit to run properly on non-javafx jdks
