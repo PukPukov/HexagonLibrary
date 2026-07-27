@@ -2,24 +2,25 @@ package ru.ancap.hexagon.direct;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import launchers.RegionTestLauncher;
+import launchers.CollapseRegionTestLauncher;
 import ru.ancap.commons.debug.HandTest;
 import ru.ancap.hexagon.GridOrientation;
 import ru.ancap.hexagon.HexagonRegion;
 import ru.ancap.hexagon.HexagonalGrid;
 import ru.ancap.hexagon.common.Figure;
 import ru.ancap.hexagon.common.Point;
+import ru.ancap.hexagon.drawer.FXCollapsedRegionDrawer;
 import ru.ancap.hexagon.drawer.FXRegionDrawer;
 
 import java.util.List;
 
 /**
- * Use launcher to launch (workaround of strange javafx bug), link: {@link RegionTestLauncher}
+ * Use launcher to launch (workaround of strange javafx bug), link: {@link CollapseRegionTestLauncher}
  */
 @HandTest
-public class RegionTest extends Application {
+public class CollapseRegionTest extends Application {
     
-    private final HexagonalGrid grid = new HexagonalGrid(GridOrientation.POINTY, new Point(100, 100), new Point(0, 0));
+    private final HexagonalGrid grid = new HexagonalGrid(GridOrientation.FLAT, new Point(100, 100), new Point(0, 0));
     
     @Override
     public void start(Stage primaryStage) {
@@ -32,7 +33,7 @@ public class RegionTest extends Application {
         
         HexagonRegion region = this.grid.regionByIntersection(figure);
         
-        new FXRegionDrawer(primaryStage, region).run();
+        new FXCollapsedRegionDrawer(primaryStage, region).run();
     }
     
     public static void main(String[] args) {

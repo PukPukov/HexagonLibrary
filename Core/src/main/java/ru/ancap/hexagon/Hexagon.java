@@ -61,7 +61,7 @@ public record Hexagon(HexagonalGrid grid, long q, long r) {
     
     public Hexagon neighbor(int index) {
         Pair<Integer, Integer> modifier = modifierMap.get(index);
-        return new Hexagon(this.grid, this.q + modifier.key(), this.r + modifier.value());
+        return new Hexagon(this.grid, this.q + modifier.a(), this.r + modifier.b());
     }
     
     @ToString.Exclude @EqualsAndHashCode.Exclude
