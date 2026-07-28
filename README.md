@@ -47,20 +47,11 @@
 | HexagonalGrid | new HexagonalGrid(Orientation orientation, Point origin, Point size) |
 
 ## Maven
-
-[![](https://jitpack.io/v/PukPukov/HexagonLibrary.svg)](https://jitpack.io/#PukPukov/HexagonLibrary)
-
-```xml
-<repository>
-    <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
-</repository>
-```
-
+Для использования библиотеки установите её локально через mvn install, для этого потребуются локально установленные puklapom и AncapCommons
 ```xml
 <dependency>
-    <groupId>com.github.PukPukov</groupId>
+    <groupId>ru.pukpukov</groupId>
     <artifactId>HexagonLibrary</artifactId>
-    <version>Tag</version>
+    <version>1.4</version>
 </dependency>
 ```
