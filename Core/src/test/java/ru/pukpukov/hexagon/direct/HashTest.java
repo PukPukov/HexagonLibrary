@@ -2,10 +2,9 @@ package ru.pukpukov.hexagon.direct;
 
 import org.junit.jupiter.api.Test;
 import ru.pukpukov.commons.iterable.StreamIterator;
-import ru.pukpukov.hexagon.*;
-import ru.pukpukov.hexagon.*;
-import ru.pukpukov.hexagon.common.Figure;
-import ru.pukpukov.hexagon.common.Point;
+import ru.pukpukov.hexagon.core.*;
+import ru.pukpukov.hexagon.core.common.Figure;
+import ru.pukpukov.hexagon.core.common.Point;
 
 import java.security.SecureRandom;
 import java.util.*;

@@ -1,9 +1,9 @@
-package ru.pukpukov.hexagon;
+package ru.pukpukov.hexagon.core;
 
 import org.jetbrains.annotations.NotNull;
 import ru.pukpukov.commons.compact.Morton64Compactor;
-import ru.pukpukov.hexagon.common.Figure;
-import ru.pukpukov.hexagon.common.Point;
+import ru.pukpukov.hexagon.core.common.Figure;
+import ru.pukpukov.hexagon.core.common.Point;
 
 import java.util.ArrayList;
 import java.util.HashSet;

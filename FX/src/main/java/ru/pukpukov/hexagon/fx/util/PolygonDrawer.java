@@ -1,4 +1,4 @@
-package ru.pukpukov.hexagon.lib;
+package ru.pukpukov.hexagon.fx.util;
 
 import javafx.scene.canvas.GraphicsContext;
 import lombok.AllArgsConstructor;

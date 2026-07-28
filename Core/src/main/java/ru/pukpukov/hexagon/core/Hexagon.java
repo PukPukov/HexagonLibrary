@@ -1,11 +1,9 @@
-package ru.pukpukov.hexagon;
+package ru.pukpukov.hexagon.core;
 
 import ru.pukpukov.commons.Pair;
 import ru.pukpukov.commons.compact.Morton64Compactor;
-import ru.pukpukov.hexagon.common.Point;
-import ru.pukpukov.hexagon.common.PointsListToPolygon;
+import ru.pukpukov.hexagon.core.common.Point;
 
-import java.awt.*;
 import java.util.List;
 import java.util.*;
 
@@ -13,10 +11,6 @@ public record Hexagon(HexagonalGrid grid, long q, long r) {
     
     public long s() {
         return -(this.q + this.r);
-    }
-    
-    public Polygon toPolygon() {
-        return PointsListToPolygon.INSTANCE.apply(this.vertexes().stream().map(HexagonVertex::position).toList());
     }
     
     public long code() {

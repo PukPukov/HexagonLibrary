@@ -1,14 +1,14 @@
-package ru.pukpukov.hexagon.drawer;
+package ru.pukpukov.hexagon.fx.drawer;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lombok.AllArgsConstructor;
-import ru.pukpukov.hexagon.Hexagon;
-import ru.pukpukov.hexagon.HexagonRegion;
-import ru.pukpukov.hexagon.HexagonSide;
-import ru.pukpukov.hexagon.HexagonVertex;
-import ru.pukpukov.hexagon.common.Point;
+import ru.pukpukov.hexagon.core.Hexagon;
+import ru.pukpukov.hexagon.core.HexagonRegion;
+import ru.pukpukov.hexagon.core.HexagonSide;
+import ru.pukpukov.hexagon.core.HexagonVertex;
+import ru.pukpukov.hexagon.core.common.Point;
 
 import java.util.List;
 import java.util.Set;

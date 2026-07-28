@@ -1,4 +1,4 @@
-package ru.pukpukov.hexagon;
+package ru.pukpukov.hexagon.core;
 
 import lombok.*;
 import lombok.experimental.Accessors;

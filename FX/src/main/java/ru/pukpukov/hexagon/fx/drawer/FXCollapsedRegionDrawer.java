@@ -1,11 +1,11 @@
-package ru.pukpukov.hexagon.drawer;
+package ru.pukpukov.hexagon.fx.drawer;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import lombok.AllArgsConstructor;
-import ru.pukpukov.hexagon.HexagonRegion;
-import ru.pukpukov.hexagon.common.Figure;
-import ru.pukpukov.hexagon.common.Point;
+import ru.pukpukov.hexagon.core.HexagonRegion;
+import ru.pukpukov.hexagon.core.common.Figure;
+import ru.pukpukov.hexagon.core.common.Point;
 
 import java.util.List;
 
