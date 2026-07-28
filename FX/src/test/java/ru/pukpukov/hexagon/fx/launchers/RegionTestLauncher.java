@@ -1,6 +1,6 @@
-package launchers;
+package ru.pukpukov.hexagon.fx.launchers;
 
-import ru.pukpukov.hexagon.direct.RegionTest;
+import ru.pukpukov.hexagon.fx.direct.RegionTest;
 
 /**
  * JavaFX for some reason requires this shit to run properly on non-javafx jdks

@@ -1,15 +1,15 @@
-package ru.pukpukov.hexagon.direct;
+package ru.pukpukov.hexagon.fx.direct;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import launchers.RegionTestLauncher;
+import ru.pukpukov.hexagon.fx.launchers.RegionTestLauncher;
 import ru.pukpukov.commons.debug.HandTest;
-import ru.pukpukov.hexagon.GridOrientation;
-import ru.pukpukov.hexagon.HexagonRegion;
-import ru.pukpukov.hexagon.HexagonalGrid;
-import ru.pukpukov.hexagon.common.Figure;
-import ru.pukpukov.hexagon.common.Point;
-import ru.pukpukov.hexagon.drawer.FXRegionDrawer;
+import ru.pukpukov.hexagon.core.GridOrientation;
+import ru.pukpukov.hexagon.core.HexagonRegion;
+import ru.pukpukov.hexagon.core.HexagonalGrid;
+import ru.pukpukov.hexagon.core.common.Figure;
+import ru.pukpukov.hexagon.core.common.Point;
+import ru.pukpukov.hexagon.fx.drawer.FXRegionDrawer;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package ru.pukpukov.hexagon;
+package ru.pukpukov.hexagon.core;
 
 import ru.pukpukov.commons.axis.CyclicNumberAxis;
-import ru.pukpukov.hexagon.common.Point;
+import ru.pukpukov.hexagon.core.common.Point;
 
 import java.util.Set;
 

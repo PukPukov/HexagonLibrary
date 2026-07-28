@@ -1,4 +1,8 @@
-package ru.pukpukov.hexagon.common;
+package ru.pukpukov.hexagon.fx.util;
+
+import ru.pukpukov.hexagon.core.Hexagon;
+import ru.pukpukov.hexagon.core.HexagonVertex;
+import ru.pukpukov.hexagon.core.common.Figure;import ru.pukpukov.hexagon.core.common.Point;
 
 import java.awt.*;
 import java.util.List;
@@ -21,6 +25,14 @@ public class PointsListToPolygon implements Function<List<Point>, Polygon> {
             yPoints[i] = (int) points.get(i).y();
         }
         return new Polygon(xPoints, yPoints, pointsAmount);
+    }
+    
+    public static Polygon ofFigure(Figure figure) {
+        return INSTANCE.apply(figure.vertexes());
+    }
+    
+    public static Polygon ofHexagon(Hexagon hexagon) {
+        return INSTANCE.apply(hexagon.vertexes().stream().map(HexagonVertex::position).toList());
     }
     
 }

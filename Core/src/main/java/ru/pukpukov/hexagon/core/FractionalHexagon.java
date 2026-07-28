@@ -1,4 +1,4 @@
-package ru.pukpukov.hexagon;
+package ru.pukpukov.hexagon.core;
 
 public record FractionalHexagon(HexagonalGrid grid, double q, double r) {
     

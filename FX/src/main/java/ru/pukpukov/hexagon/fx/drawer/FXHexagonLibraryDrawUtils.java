@@ -1,4 +1,4 @@
-package ru.pukpukov.hexagon.drawer;
+package ru.pukpukov.hexagon.fx.drawer;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
