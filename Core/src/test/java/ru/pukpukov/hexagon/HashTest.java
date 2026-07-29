@@ -1,4 +1,4 @@
-package ru.pukpukov.hexagon.direct;
+package ru.pukpukov.hexagon;
 
 import org.junit.jupiter.api.Test;
 import ru.pukpukov.commons.iterable.StreamIterator;

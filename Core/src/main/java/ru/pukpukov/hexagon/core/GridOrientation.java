@@ -32,7 +32,7 @@ public final class GridOrientation {
         new double[] {2.0 / 3.0, 0.0, -1.0 / 3.0, Math.sqrt(3.0) / 3.0},
         0.0,
         List.of(
-            new Pair<>( 1,  0),
+            new Pair<>( 1,  0), // TODO объединить эти два массива и хранить только оффсет
             new Pair<>( 0,  1),
             new Pair<>(-1,  1),
             new Pair<>(-1,  0),

@@ -1,21 +1,38 @@
 package ru.pukpukov.hexagon.core;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NonNull;
 import ru.pukpukov.commons.Pair;
-import ru.pukpukov.commons.compact.Morton64Compactor;
 import ru.pukpukov.hexagon.core.common.Point;
 
 import java.util.List;
 import java.util.*;
 
-public record Hexagon(HexagonalGrid grid, long q, long r) {
+@RequiredArgsConstructor @Getter
+@EqualsAndHashCode
+public final class Hexagon {
+    
+    @EqualsAndHashCode.Exclude
+    private final HexagonalGrid grid;
+    private final long q;
+    private final long r;
+    
+    public static double s(double q, double r) {
+        return -(q + r);
+    }
+    
+    public static long s(long q, long r) {
+        return -(q + r);
+    }
     
     public long s() {
-        return -(this.q + this.r);
+        return s(this.q, this.r);
     }
     
     public long code() {
-        Morton64Compactor mort = this.grid.morton();
-        return mort.pack(this.q, this.r);
+        return this.grid.compactor().pack(this.q, this.r);
     }
     
     public Point center() {
@@ -72,12 +89,12 @@ public record Hexagon(HexagonalGrid grid, long q, long r) {
     }
     
     public boolean neighborOf(Hexagon hexagon) {
-        return this.neighbors(1).contains(hexagon);
+        return this.neighbors(1).contains(hexagon); // TODO оптимизировать
     }
     
     @Override
-    public String toString() {
-        return this.q+";"+this.r;
+    public @NonNull String toString() {
+        return this.q + ";" + this.r;
     }
     
 }

@@ -1,6 +1,7 @@
 package ru.pukpukov.hexagon.core;
 
 import org.jetbrains.annotations.NotNull;
+import ru.pukpukov.commons.compact.Compactor;
 import ru.pukpukov.commons.compact.Morton64Compactor;
 import ru.pukpukov.hexagon.core.common.Figure;
 import ru.pukpukov.hexagon.core.common.Point;
@@ -11,7 +12,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public record HexagonalGrid(GridOrientation orientation, Point size, Point origin, Morton64Compactor morton) {
+import static ru.pukpukov.hexagon.core.Hexagon.s;
+
+public record HexagonalGrid(GridOrientation orientation, Point size, Point origin, Compactor compactor) {
     
     public static final HexagonalGrid CLASSIC = new HexagonalGrid(GridOrientation.FLAT, new Point(100, 100), new Point(0, 0));
     
@@ -23,22 +26,32 @@ public record HexagonalGrid(GridOrientation orientation, Point size, Point origi
         this(orientation, size, origin, new Morton64Compactor());
     }
     
-    
     public Hexagon hexagon(long code) {
-        int[] qr = this.morton.unpack(code);
+        int[] qr = this.compactor.unpack(code);
         return new Hexagon(this, qr[0], qr[1]);
     }
     
     public Hexagon hexagon(Point point) {
         double x = (point.x() - this.origin.x()) / this.size.x();
         double y = (point.y() - this.origin.y()) / this.size.y();
-        double q = this.orientation.b()[0] * x + this.orientation.b()[1] * y;
-        double r = this.orientation.b()[2] * x + this.orientation.b()[3] * y;
-        return this.fractionalHexagon(q, r).asStrict();
-    }
-    
-    public FractionalHexagon fractionalHexagon(double q, double r) {
-        return new FractionalHexagon(this, q, r);
+        double fractionalQ = this.orientation.b()[0] * x + this.orientation.b()[1] * y;
+        double fractionalR = this.orientation.b()[2] * x + this.orientation.b()[3] * y;
+        double fractionalS = s(fractionalQ, fractionalR);
+        
+        long q = Math.round(fractionalQ);
+        long r = Math.round(fractionalR);
+        long s = Math.round(fractionalS);
+        double qDiff = Math.abs(q - fractionalQ);
+        double rDiff = Math.abs(r - fractionalR);
+        double sDiff = Math.abs(s - fractionalS);
+        
+        if (qDiff > rDiff && qDiff > sDiff) {
+            q = -(r + s);
+        } else if (rDiff > sDiff) {
+            r = -(q + s);
+        }
+        
+        return new Hexagon(this, q, r);
     }
     
     public HexagonRegion region(Set<Hexagon> hexagons) {
